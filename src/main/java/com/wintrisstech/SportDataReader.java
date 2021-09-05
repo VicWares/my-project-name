@@ -10,14 +10,15 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.*;
 public class SportDataReader
 {
-    private String deskTopPath = System.getProperty("user.home") + "/Desktop";/* User's desktop path */
+    private String deskTopPath = "/Users/vicwintriss/git/Covers/SportData.xlsx";//System.getProperty("user.home") + "/Desktop";/* User's desktop path */
     private XSSFWorkbook sportDataWorkbook;
     private InputStream is;
     public XSSFWorkbook readSportData()
     {
         try
         {
-            is = new FileInputStream(deskTopPath + "/SportData.xlsx");
+            System.out.println("xxxxxxxxxxxxx " + deskTopPath);
+            is = new FileInputStream(deskTopPath);
             sportDataWorkbook = (XSSFWorkbook) WorkbookFactory.create(is);
             is.close();
         }

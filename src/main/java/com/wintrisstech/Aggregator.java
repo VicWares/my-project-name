@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 210613A
+ * version 210905
  *******************************************************************/
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
@@ -15,11 +15,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.util.HashMap;
 
 import static java.lang.System.out;
+import static org.apache.poi.ss.usermodel.HorizontalAlignment.CENTER;
+import static org.apache.poi.ss.usermodel.HorizontalAlignment.LEFT;
 public class Aggregator
 {
+    private String thisSeason;
     private String ouUnder;
-    private String home;
-    private String away;
     private String ouOver;
     private String dataEventID;
     private String homeTeam;
@@ -40,17 +41,25 @@ public class Aggregator
     private String atsAway;
     private HashMap<String, String> ouOversMap;
     private HashMap<String, String> ouUndersMap;
+    private String completeHomeTeamName;
+    private String completeAwayTeamName;
     public XSSFWorkbook buildSportDataUpdate(XSSFWorkbook sportDataWorkbook, String dataEventID, int eventIndex)
     {
         sportDataSheet = sportDataWorkbook.getSheet("Data");
-        sportDataSheet.createRow(eventIndex);
-        sportDataSheet.setColumnWidth(1, 25 * 256);
+        CellStyle leftStyle = sportDataWorkbook.createCellStyle();
+        leftStyle.setAlignment(LEFT);
+        CellStyle centerStyle = sportDataWorkbook.createCellStyle();
+        centerStyle.setAlignment(CENTER);
         CellStyle myStyle = sportDataWorkbook.createCellStyle();
         Font myFont = sportDataWorkbook.createFont();
         myFont.setBold(true);
-        myStyle.setFont(myFont);
         XSSFFont xssfFont = (XSSFFont) myFont;
+        myStyle.setFont(myFont);
         xssfFont.setColor(new XSSFColor(rgb, null));//Load new values into SportData.xlsx sheet
+        sportDataSheet.setDefaultColumnStyle(0, leftStyle);
+        sportDataSheet.setDefaultColumnStyle(1, centerStyle);
+        sportDataSheet.createRow(eventIndex);
+        sportDataSheet.setColumnWidth(1, 25 * 256);
         homeTeam = thisWeekHomeTeamsMap.get(dataEventID);
         awayTeam = thisWeekAwayTeamsMap.get(dataEventID);
         thisMatchupDate = thisWeekGameDatesMap.get(dataEventID);
@@ -58,12 +67,12 @@ public class Aggregator
         atsAway = atsAwaysMap.get(dataEventID);
         ouOver = ouOversMap.get(dataEventID);
         ouUnder = ouUndersMap.get(dataEventID);
-        out.println("................................ "+ eventIndex + " " + dataEventID + " " + homeTeam + " " + awayTeam + " " + thisMatchupDate + " " + atsHome + " " + atsAway + " " + ouOver + " " + ouUnder);
+        out.println("................................ "+ eventIndex + " " + dataEventID + " " + completeHomeTeamName + " " + completeAwayTeamName + " " + thisMatchupDate + " " + atsHome + " " + atsAway + " " + ouOver + " " + ouUnder);
         sportDataSheet.getRow(eventIndex).createCell(0);
-        sportDataSheet.getRow(eventIndex).getCell(0).setCellStyle(myStyle);
+        sportDataSheet.getRow(eventIndex).getCell(0).setCellStyle(leftStyle);
         sportDataSheet.getRow(eventIndex).getCell(0).setCellValue(awayTeam + " @ " + homeTeam);
         sportDataSheet.getRow(eventIndex).createCell(1);
-        sportDataSheet.getRow(eventIndex).getCell(1).setCellStyle(myStyle);
+        sportDataSheet.getRow(eventIndex).getCell(1).setCellStyle(centerStyle);
         sportDataSheet.getRow(eventIndex).getCell(1).setCellValue(thisMatchupDate);
         sportDataSheet.getRow(eventIndex).createCell(59);
         sportDataSheet.getRow(eventIndex).getCell(59).setCellStyle(myStyle);
@@ -97,5 +106,17 @@ public class Aggregator
     public void setOuUndersMap(HashMap<String, String> ouUndersMap)
     {
         this.ouUndersMap = ouUndersMap;
+    }
+    public void setThisSeason(String thisSeason)
+    {
+        this.thisSeason = thisSeason;
+    }
+    public void setCompleteHomeTeamName(String completeHomeTeamName)
+    {
+        this.completeHomeTeamName = completeHomeTeamName;
+    }
+    public void setCompleteAwayTeamName(String completeAwayTeamName)
+    {
+        this.completeAwayTeamName = completeAwayTeamName;
     }
 }

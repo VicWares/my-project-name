@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 210613A
+ * version 210902
  * Builds data event id array and calendar date array
  *******************************************************************/
 import org.jsoup.nodes.Element;
@@ -12,8 +12,13 @@ import java.util.HashMap;
 public class DataCollector
 {
     private String thisMatchupID;
-    private String homeTeam;
-    private String awayTeam;
+    private String homeTeamName;
+    private String awayTeamName;
+    private String homeTeamNickname;
+    private String awayTeamNickname;
+    private String awayTeamCompleteName;//e.g. Kansas City Chiefs
+    private String homeTeamCompleteName;//e.g Houston Texans
+    public String gameIdentifier;//e.g 2020 - Houston Texans @ Kansas City Chiefs
     private String awayTeamScore;
     private String homeTeamScore;
     private String gameDate;
@@ -32,6 +37,7 @@ public class DataCollector
     private HashMap<String, String> ouUndersMap = new HashMap<>();
     private HashMap<String, String> ouOversMap = new HashMap<>();
     private String thisWeek;
+    private String thisSeason;
     private Elements thisWeekMatchupIdElements;
     private ArrayList<String> thisWeekMatchupIDs;
     public void collectThisWeekMatchups(Elements thisWeekElements)
@@ -40,11 +46,15 @@ public class DataCollector
         thisWeekMatchupIdElements = thisWeekElements.select(".cmg_matchup_game_box");
         for (Element e : thisWeekMatchupIdElements)//Build week matchup IDs array
         {
-            awayTeam = e.attr("data-away-team-fullname-search");
-            homeTeam = e.attr("data-home-team-fullname-search");
+            awayTeamName = e.attr("data-away-team-fullname-search");
+            awayTeamNickname = e.attr("data-away-team-nickname-search");
+            awayTeamCompleteName = awayTeamName + " " + awayTeamNickname;
+            homeTeamName = e.attr("data-home-team-fullname-search");
+            homeTeamNickname = e.attr("data-home-team-nickname-search");
+            homeTeamCompleteName = homeTeamName + " " + homeTeamNickname;
+            gameIdentifier =  thisSeason + " - " + awayTeamCompleteName + " @ " + homeTeamCompleteName;
+            System.out.println(gameIdentifier);
             thisMatchupID = e.attr("data-event-id");
-//            String weekNumber = e.select("a").text();
-//            System.out.println("*********************** " + weekNumber);
             String[] gameDateTime = e.attr("data-game-date").split(" ");
             gameDate = gameDateTime[0];
 //            String gameTime = gameDateTime[1];
@@ -56,10 +66,10 @@ public class DataCollector
             thisWeek = e.attr("data-competition-type");
             thisWeekGameDates.add(gameDate);
             thisWeekGameDatesMap.put(thisMatchupID, gameDate);
-            thisWeekHomeTeams.add(homeTeam);
-            thisWeekAwayTeams.add(awayTeam);
-            thisWeekHomeTeamsMap.put(thisMatchupID, homeTeam);
-            thisWeekAwayTeamsMap.put(thisMatchupID, awayTeam);
+            thisWeekHomeTeams.add(homeTeamCompleteName);
+            thisWeekAwayTeams.add(awayTeamCompleteName);
+            thisWeekHomeTeamsMap.put(thisMatchupID, homeTeamName);
+            thisWeekAwayTeamsMap.put(thisMatchupID, awayTeamName);
             thisWeekHomeTeamScores.add(homeTeamScore);
             thisWeekAwayTeamScores.add((awayTeamScore));
             thisGameWeekNumbers.add(thisWeek);
@@ -68,16 +78,27 @@ public class DataCollector
     }
     public void collectConsensusData(Elements thisMatchupConsensus, String thisMatchupID)
     {
+        String ouOver = null;
+        String ouUnder = null;
+        String atsHome = null;
+        String atsAway = null;
         Elements rightConsensus = thisMatchupConsensus.select(".covers-CoversConsensusDetailsTable-finalWagersright");//Home/Under
         Elements leftConsensus = thisMatchupConsensus.select(".covers-CoversConsensusDetailsTable-finalWagersleft");//Away/Over
-        String ouOver = leftConsensus.select("div").get(1).text();
-        String ouUnder = rightConsensus.select("div").get(1).text();
-        String atsHome = leftConsensus.select("div").get(0).text();
-        String atsAway = rightConsensus.select("div").get(0).text();
-        atsHomesMap.put(thisMatchupID, atsAway);
-        atsAwaysMap.put(thisMatchupID, atsHome);
+        try//To catch missing consensus data due to delayed or cancelled game
+        {
+            ouUnder = rightConsensus.select("div").get(1).text();
+            ouOver = leftConsensus.select("div").get(1).text();
+            atsHome = leftConsensus.select("div").get(0).text();
+            atsAway = rightConsensus.select("div").get(0).text();
+        }
+        catch (Exception e)
+        {
+            System.out.println("========================> Missing Consensus Data" + e);
+        }
         ouOversMap.put(thisMatchupID,ouOver);
         ouUndersMap.put(thisMatchupID, ouUnder);
+        atsHomesMap.put(thisMatchupID, atsAway);
+        atsAwaysMap.put(thisMatchupID, atsHome);
     }
     public void collectAllSeasonDates(Elements nflRandomElements)
     {
@@ -105,14 +126,12 @@ public class DataCollector
             i++;
         }
     }
-    public HashMap<String, String> getThisWeekHomeTeamsMap()
+    public ArrayList<String> getThisWeekMatchupIDs()
     {
-        return thisWeekHomeTeamsMap;
+        return thisWeekMatchupIDs;
     }
-    public HashMap<String, String> getThisWeekAwayTeamsMap()
-    {
-        return thisWeekAwayTeamsMap;
-    }
+    public HashMap<String, String> getThisWeekHomeTeamsMap(){return thisWeekHomeTeamsMap;}
+    public HashMap<String, String> getThisWeekAwayTeamsMap(){return thisWeekAwayTeamsMap;}
     public HashMap<String, String> getThisWeekGameDatesMap()
     {
         return thisWeekGameDatesMap;
@@ -133,8 +152,13 @@ public class DataCollector
     {
         return ouUndersMap;
     }
-    public ArrayList<String> getThisWeekMatchupIDs()
+    public void setThisSeason(String thisSeason){ this.thisSeason = thisSeason; }
+    public String getAwayTeamCompleteName()
     {
-        return thisWeekMatchupIDs;
+        return awayTeamCompleteName;
+    }
+    public String getHomeTeamCompleteName()
+    {
+        return homeTeamCompleteName;
     }
 }
