@@ -10,31 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/my-project-name.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my-project-name.iws" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/LambdaStudy/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/LambdaStudy/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/LambdaStudy/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/LambdaStudy/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/LambdaStudy/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/LambdaStudy/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/LambdaStudy/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/LambdaStudy/src/main/java/org/example/App.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/LambdaStudy/target/classes/org/example/App.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/LambdaStudy/target/test-classes/org/example/AppTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/NeurophStudy/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/NeurophStudy/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/NeurophStudy/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/VentilatorProject/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/VentilatorProject/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/VentilatorProject/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/VentilatorProject/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/VentilatorProject/VentilatorProject.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Aggregator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Aggregator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Aggregator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/InfoPrinter.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/SportDataReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/SportDataReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/SportDataReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/SportDataWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/WebSiteReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/WebSiteReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -401,7 +385,22 @@
       <workItem from="1630633406953" duration="2180000" />
       <workItem from="1630809322632" duration="5234000" />
       <workItem from="1630860427088" duration="639000" />
-      <workItem from="1630875862849" duration="5343000" />
+      <workItem from="1630875862849" duration="6757000" />
+      <workItem from="1630884254059" duration="12000" />
+      <workItem from="1630885958069" duration="1885000" />
+      <workItem from="1630946721622" duration="4707000" />
+      <workItem from="1630961229945" duration="11709000" />
+      <workItem from="1630973786436" duration="737000" />
+      <workItem from="1630984398864" duration="2179000" />
+      <workItem from="1631065551291" duration="10427000" />
+      <workItem from="1631076755923" duration="1284000" />
+      <workItem from="1631117110583" duration="647000" />
+      <workItem from="1631117815159" duration="183000" />
+      <workItem from="1631121126944" duration="1321000" />
+      <workItem from="1631122655882" duration="507000" />
+      <workItem from="1631157030867" duration="492000" />
+      <workItem from="1631157552612" duration="99000" />
+      <workItem from="1631157708493" duration="285000" />
     </task>
     <task id="LOCAL-00001" summary="Keith fix version 210208A">
       <created>1612851099413</created>
@@ -669,7 +668,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624149457988</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="version 210905...cleaning up format.">
+      <created>1630881664906</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1630881664906</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -703,7 +709,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version 210409&#10;Succssfully building NFL Weeks Array/Data Event ID Array" />
     <MESSAGE value="version 210409&#10;Succssfully building NFL Week Array/Data Event ID Array" />
     <MESSAGE value="version 210409&#10;Succssfully building NFL Week Array/Data Event ID Arrays" />
     <MESSAGE value="version 210409&#10;Succssfully building both NFL Week Array/Data Event ID Arrays" />
@@ -728,21 +733,17 @@
     <MESSAGE value="version 210612...Reworked version 210605. Trying to cycle through all weeks." />
     <MESSAGE value="version 210612A...Working for 32 matchups...then quits...out of array index" />
     <MESSAGE value="version 210613A...Working for all weeks, all matchups of 2019-2020 season.  Delivered to Dan for comments." />
-    <option name="LAST_COMMIT_MESSAGE" value="version 210613A...Working for all weeks, all matchups of 2019-2020 season.  Delivered to Dan for comments." />
+    <MESSAGE value="version 210905...cleaning up format." />
+    <option name="LAST_COMMIT_MESSAGE" value="version 210905...cleaning up format." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/src/main/java/com/wintrisstech/SportDataReader.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelReader.java</url>
           <line>14</line>
-          <properties field="is" class="com.wintrisstech.SportDataReader" />
+          <properties field="is" class="com.wintrisstech.ExcelReader" />
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/wintrisstech/SportDataReader.java</url>
-          <line>19</line>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

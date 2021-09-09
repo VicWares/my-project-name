@@ -2,75 +2,71 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 210905
+ * version 210907
  *******************************************************************/
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.usermodel.XSSFColor;
-import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.awt.*;
 import java.util.HashMap;
 
-import static java.lang.System.out;
 import static org.apache.poi.ss.usermodel.HorizontalAlignment.CENTER;
 import static org.apache.poi.ss.usermodel.HorizontalAlignment.LEFT;
-public class Aggregator
+public class ExcelBuilder
 {
     private String thisSeason;
     private String ouUnder;
     private String ouOver;
-    private String dataEventID;
     private String homeTeam;
     private String awayTeam;
-    private int gameCount = 7;
-    private final int rowOffset = 3;
     private String thisMatchupDate;
-    private HashMap<String, String> thisWeekHomeTeamsMap = new HashMap<>();
-    private HashMap<String, String> thisWeekAwayTeamsMap = new HashMap<>();
-    private HashMap<String, String> thisWeekGameDatesMap = new HashMap<>();
+    private HashMap<String, String> homeTeamsMap = new HashMap<>();
+    private HashMap<String, String> awayTeamsMap = new HashMap<>();
+    private HashMap<String, String> gameDatesMap = new HashMap<>();
     private HashMap<String, String> atsHomesMap = new HashMap<>();
     private HashMap<String, String> atsAwaysMap = new HashMap<>();
+    private HashMap<String, String> ouOversMap;
+    private HashMap<String, String> ouUndersMap;
     private Sheet sportDataSheet;
     private XSSFWorkbook sportDataWorkBook = new XSSFWorkbook();
     private XSSFSheet sportDataUpdateSheet = null;
-    byte[] rgb = new byte[]{(byte) 255, (byte) 0, (byte) 0};
+    byte[] redColor = new byte[]{(byte) 255, (byte) 0, (byte) 0};
+    Color color =  new Color(215,228,188);
     private String atsHome;
     private String atsAway;
-    private HashMap<String, String> ouOversMap;
-    private HashMap<String, String> ouUndersMap;
     private String completeHomeTeamName;
     private String completeAwayTeamName;
-    public XSSFWorkbook buildSportDataUpdate(XSSFWorkbook sportDataWorkbook, String dataEventID, int eventIndex)
+    private String gameIdentifier;
+    public XSSFWorkbook buildExcel(XSSFWorkbook sportDataWorkbook, String dataEventID, int eventIndex, String gameIdentifier)
     {
         sportDataSheet = sportDataWorkbook.getSheet("Data");
         CellStyle leftStyle = sportDataWorkbook.createCellStyle();
         leftStyle.setAlignment(LEFT);
+        System.out.println("53 ExcelBuilder ................................ "+ eventIndex + " " + dataEventID + " "  + thisMatchupDate + " " + atsHome + " " + atsAway + " " + ouOver + " " + ouUnder + " " + gameIdentifier);
         CellStyle centerStyle = sportDataWorkbook.createCellStyle();
         centerStyle.setAlignment(CENTER);
         CellStyle myStyle = sportDataWorkbook.createCellStyle();
-        Font myFont = sportDataWorkbook.createFont();
-        myFont.setBold(true);
-        XSSFFont xssfFont = (XSSFFont) myFont;
-        myStyle.setFont(myFont);
-        xssfFont.setColor(new XSSFColor(rgb, null));//Load new values into SportData.xlsx sheet
+        XSSFCellStyle redStyle = sportDataWorkbook.createCellStyle();
+        redStyle.setFillForegroundColor(IndexedColors.RED.getIndex());
         sportDataSheet.setDefaultColumnStyle(0, leftStyle);
         sportDataSheet.setDefaultColumnStyle(1, centerStyle);
         sportDataSheet.createRow(eventIndex);
         sportDataSheet.setColumnWidth(1, 25 * 256);
-        homeTeam = thisWeekHomeTeamsMap.get(dataEventID);
-        awayTeam = thisWeekAwayTeamsMap.get(dataEventID);
-        thisMatchupDate = thisWeekGameDatesMap.get(dataEventID);
+        homeTeam = homeTeamsMap.get(dataEventID);
+        awayTeam = awayTeamsMap.get(dataEventID);
+        thisMatchupDate = gameDatesMap.get(dataEventID);
         atsHome = atsHomesMap.get(dataEventID);
         atsAway = atsAwaysMap.get(dataEventID);
         ouOver = ouOversMap.get(dataEventID);
         ouUnder = ouUndersMap.get(dataEventID);
-        out.println("................................ "+ eventIndex + " " + dataEventID + " " + completeHomeTeamName + " " + completeAwayTeamName + " " + thisMatchupDate + " " + atsHome + " " + atsAway + " " + ouOver + " " + ouUnder);
         sportDataSheet.getRow(eventIndex).createCell(0);
         sportDataSheet.getRow(eventIndex).getCell(0).setCellStyle(leftStyle);
-        sportDataSheet.getRow(eventIndex).getCell(0).setCellValue(awayTeam + " @ " + homeTeam);
+        sportDataSheet.getRow(eventIndex).getCell(0).setCellStyle(redStyle);
+        sportDataSheet.getRow(eventIndex).getCell(0).setCellValue(gameIdentifier);
         sportDataSheet.getRow(eventIndex).createCell(1);
         sportDataSheet.getRow(eventIndex).getCell(1).setCellStyle(centerStyle);
         sportDataSheet.getRow(eventIndex).getCell(1).setCellValue(thisMatchupDate);
@@ -88,9 +84,9 @@ public class Aggregator
         sportDataSheet.getRow(eventIndex).getCell(66).setCellValue(ouUnder);
         return sportDataWorkbook;
     }
-    public void setThisWeekHomeTeamsMap(HashMap<String, String> thisWeekHomeTeamsMap){this.thisWeekHomeTeamsMap = thisWeekHomeTeamsMap;}
-    public void setThisWeekAwayTeamsMap(HashMap<String, String> thisWeekAwayTeamsMap){this.thisWeekAwayTeamsMap = thisWeekAwayTeamsMap;}
-    public void setThisWeekGameDatesMap(HashMap<String, String> thisWeekGameDatesMap) {this.thisWeekGameDatesMap = thisWeekGameDatesMap;}
+    public void setHomeTeamsMap(HashMap<String, String> homeTeamsMap){this.homeTeamsMap = homeTeamsMap;}
+    public void setThisWeekAwayTeamsMap(HashMap<String, String> thisWeekAwayTeamsMap){this.awayTeamsMap = thisWeekAwayTeamsMap;}
+    public void setGameDatesMap(HashMap<String, String> gameDatesMap) {this.gameDatesMap = gameDatesMap;}
     public void setAtsHomesMap(HashMap<String, String> atsHomes)
     {
         this.atsHomesMap = atsHomes;
@@ -99,24 +95,16 @@ public class Aggregator
     {
         this.atsAwaysMap = atsAwayMap;
     }
-    public void setOuOversMap(HashMap<String, String> ouOversMap)
-    {
-        this.ouOversMap = ouOversMap;
-    }
+    public void setOuOversMap(HashMap<String, String> ouOversMap){this.ouOversMap = ouOversMap;}
     public void setOuUndersMap(HashMap<String, String> ouUndersMap)
     {
         this.ouUndersMap = ouUndersMap;
     }
-    public void setThisSeason(String thisSeason)
+    //public void setThisSeason(String thisSeason)
     {
         this.thisSeason = thisSeason;
     }
-    public void setCompleteHomeTeamName(String completeHomeTeamName)
-    {
-        this.completeHomeTeamName = completeHomeTeamName;
-    }
-    public void setCompleteAwayTeamName(String completeAwayTeamName)
-    {
-        this.completeAwayTeamName = completeAwayTeamName;
-    }
+    public void setCompleteHomeTeamName(String completeHomeTeamName){this.completeHomeTeamName = completeHomeTeamName;}
+    public void setCompleteAwayTeamName(String completeAwayTeamName){this.completeAwayTeamName = completeAwayTeamName;}
+    public void setGameIdentifier(String gameIdentifier){this.gameIdentifier = gameIdentifier;}
 }
