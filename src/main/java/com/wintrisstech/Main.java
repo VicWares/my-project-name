@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 public class Main extends JComponent
 {
-    private static String version = "210923";
+    private static String version = "211010";
     private String nflRandomWeekURL = "https://www.covers.com/sports/nfl/matchups";
     private XSSFWorkbook sportDataWorkbook;
     private String deskTopPath = "/Users/vicwintriss/git/Covers/SportData.xlsx"; //System.getProperty("user.home") + "/Desktop";/* User's desktop path */
@@ -51,7 +51,7 @@ public class Main extends JComponent
         {
             String thisWeekDate = "2021-09-23";
             thisWeekDate = JOptionPane.showInputDialog("Enter NFL week code");
-            thisWeekDate = "2021-09-23";
+            thisWeekDate = "2021-10-07";
             System.out.println("47 Main NEW WEEK => " + thisWeekDate);
             thisWeekElements = webSiteReader.readCleanWebsite("https://www.covers.com/sports/nfl/matchups?selectedDate=" + thisWeekDate);//Get all of this week's games info
             dataCollector.collectThisWeekMatchups(thisWeekElements);
