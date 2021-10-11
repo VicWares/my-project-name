@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 210907
+ * version 211010
  *******************************************************************/
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -46,7 +46,6 @@ public class ExcelBuilder
         sportDataSheet = sportDataWorkbook.getSheet("Data");
         CellStyle leftStyle = sportDataWorkbook.createCellStyle();
         leftStyle.setAlignment(LEFT);
-        System.out.println("53 ExcelBuilder ................................ "+ eventIndex + " " + dataEventID + " "  + thisMatchupDate + " " + atsHome + " " + atsAway + " " + ouOver + " " + ouUnder + " " + gameIdentifier);
         CellStyle centerStyle = sportDataWorkbook.createCellStyle();
         centerStyle.setAlignment(CENTER);
         CellStyle myStyle = sportDataWorkbook.createCellStyle();
@@ -100,7 +99,6 @@ public class ExcelBuilder
     {
         this.ouUndersMap = ouUndersMap;
     }
-    //public void setThisSeason(String thisSeason)
     {
         this.thisSeason = thisSeason;
     }

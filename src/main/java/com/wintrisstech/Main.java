@@ -2,11 +2,13 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 210907
- * * Launch with Covers.command
+ * version 211010
+ * Build .dmg with
+ * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jsoup.select.Elements;
+
 import javax.swing.*;
 import java.io.IOException;
 import java.text.ParseException;
@@ -14,11 +16,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 public class Main extends JComponent
 {
-    private static String version = "210907";
+    private static String version = "210923";
     private String nflRandomWeekURL = "https://www.covers.com/sports/nfl/matchups";
     private XSSFWorkbook sportDataWorkbook;
     private String deskTopPath = "/Users/vicwintriss/git/Covers/SportData.xlsx"; //System.getProperty("user.home") + "/Desktop";/* User's desktop path */
     private HashMap<String, String> weekList = new HashMap<>();
+    private HashMap<String,String> cityNameMap = new HashMap<>();
     public DataCollector dataCollector = new DataCollector();
     public WebSiteReader webSiteReader = new WebSiteReader();
     public ExcelReader excelReader = new ExcelReader();
@@ -37,21 +40,30 @@ public class Main extends JComponent
     }
     private void initialize() throws IOException
     {
+        fillCityNameMap();//Correct for Covers variations in team city names
+        dataCollector.setCityNameMap(cityNameMap);
         ArrayList<String> thisSeasonDates = new ArrayList<>();
         fillSeasonDatesList(thisSeasonDates);//Puts all week dates into thisSeasonDates
         dataCollector.setThisSeason(thisSeason);//2021 for now TODO:make user selectable
         nflHistoryElements = webSiteReader.readCleanWebsite("https://www.covers.com/sports/nfl/matchups");//Gets all NFL season beginning date history and this season year info.
         dataCollector.collectSeasonInfo(nflHistoryElements);//Builds HashMaps and ArrayLists for this season from Covers.com
-        for (String thisWeekDate : thisSeasonDates)//Process all matchups in this season....OUTER LOOP
+        //for (String thisWeekDate : thisSeasonDates)//Process all matchups in this season....OUTER LOOP
         {
-            System.out.println("************************************** NEW NFL WEEK => " + thisWeekDate + ", NFL SEASON => " + thisSeason + " ***************************************");
+            String thisWeekDate = "2021-09-23";
+            thisWeekDate = JOptionPane.showInputDialog("Enter NFL week code");
+            thisWeekDate = "2021-09-23";
+            System.out.println("47 Main NEW WEEK => " + thisWeekDate);
             thisWeekElements = webSiteReader.readCleanWebsite("https://www.covers.com/sports/nfl/matchups?selectedDate=" + thisWeekDate);//Get all of this week's games info
             dataCollector.collectThisWeekMatchups(thisWeekElements);
+            Elements oddsElements = webSiteReader.readCleanWebsite("https://www.covers.com/sport/football/nfl/odds");//Info as of the NFL week effective when logging into Covers
+            Elements american = oddsElements.select(".covers-CoversOdds-mainTR .covers-CoversMatchups-centerAlignHelper");
+            OddsCollector.collectThisWeekOdds(thisWeekDate, american);
             sportDataWorkbook = excelReader.readSportData();
-            for (String thisMatchupID : dataCollector.getThisWeekMatchupIDs())////Process all matchups in this week...INNER LOOP
+            ArrayList<String> thisWweekMatchupIDs = dataCollector.getThisWeekMatchupIDs();
+            for (String thisMatchupId : thisWweekMatchupIDs)////Process all matchups in this week...INNER LOOP
             {
-                thisMatchupConsensusElements = webSiteReader.readCleanWebsite("https://contests.covers.com/consensus/matchupconsensusdetails?externalId=%2fsport%2ffootball%2fcompetition%3a" + thisMatchupID);
-                dataCollector.collectConsensusData(thisMatchupConsensusElements, thisMatchupID);
+                thisMatchupConsensusElements = webSiteReader.readCleanWebsite("https://contests.covers.com/consensus/matchupconsensusdetails?externalId=%2fsport%2ffootball%2fcompetition%3a" + thisMatchupId);
+                dataCollector.collectConsensusData(thisMatchupConsensusElements, thisMatchupId);
                 excelBuilder.setThisWeekAwayTeamsMap(dataCollector.getThisWeekAwayTeamsMap());
                 excelBuilder.setHomeTeamsMap(dataCollector.getThisWeekHomeTeamsMap());
                 excelBuilder.setGameDatesMap(dataCollector.getGameDatesMap());
@@ -61,8 +73,9 @@ public class Main extends JComponent
                 excelBuilder.setOuUndersMap(dataCollector.getOuUndersMap());
                 excelBuilder.setCompleteHomeTeamName(dataCollector.getHomeTeamCompleteName());
                 excelBuilder.setCompleteAwayTeamName(dataCollector.getAwayTeamCompleteName());
-                excelBuilder.setGameIdentifier(dataCollector.getGameIdentifierMap().get(thisMatchupID));
-                excelBuilder.buildExcel(sportDataWorkbook, thisMatchupID, globalMatchupIndex, dataCollector.getGameIdentifierMap().get(thisMatchupID));
+                excelBuilder.setGameIdentifier(dataCollector.getGameIdentifierMap().get(thisMatchupId));
+                excelBuilder.buildExcel(sportDataWorkbook, thisMatchupId, globalMatchupIndex, dataCollector.getGameIdentifierMap().get(thisMatchupId));
+                System.out.println("66 Main NEW MATCHUP => " + dataCollector.getGameIdentifierMap().get(thisMatchupId));
                 globalMatchupIndex++;
             }
             excelWriter.openOutputStream();
@@ -73,7 +86,7 @@ public class Main extends JComponent
     }
     private void fillSeasonDatesList(ArrayList<String> thisSeasonDates)
     {
-        thisSeasonDates.add("2021-09-09");//Season start
+        thisSeasonDates.add("2021-09-09");//Season start...Week 1
         thisSeasonDates.add("2021-09-16");
         thisSeasonDates.add("2021-09-23");
         thisSeasonDates.add("2021-09-30");
@@ -93,4 +106,49 @@ public class Main extends JComponent
         thisSeasonDates.add("2022-01-09");
         thisSeasonDates.add("2022-02-06");
     }
+    private void fillCityNameMap()
+    {
+        cityNameMap.put("Minneapolis", "Minnesota");//Minnesota Vikings
+        cityNameMap.put("Tampa", "Tampa Bay");//Tampa Bay Buccaneers
+        cityNameMap.put("Tampa Bay", "Tampa Bay");//Tampa Bay Buccaneers
+        cityNameMap.put("Arlington", "Dallas");//Dallas Cowboys
+        cityNameMap.put("Dallas", "Dallas");//Dallas Cowboys
+        cityNameMap.put("Orchard Park", "Buffalo");//Buffalo Bills
+        cityNameMap.put("Buffalo", "Buffalo");//Buffalo Bills
+        cityNameMap.put("Charlotte", "Carolina");//Carolina Panthers
+        cityNameMap.put("Carolina", "Carolina");//Carolina Panthers
+        cityNameMap.put("Arizona", "Arizona");//Arizona Cardinals
+        cityNameMap.put("Tempe", "Arizona");//Arizona Cardinals
+        cityNameMap.put("Foxborough", "New England");//New England Patriots
+        cityNameMap.put("New England", "New England");//New England Patriots
+        cityNameMap.put("East Rutherford", "New York");//New York Giants and New York Jets
+        cityNameMap.put("New York", "New York");//New York Giants and New York Jets
+        cityNameMap.put("Landover", "Washington");//Washington Football Team
+        cityNameMap.put("Washington", "Washington");//Washington Football Team
+        cityNameMap.put("Nashville", "Tennessee");//Tennessee Titans
+        cityNameMap.put("Miami", "Miami");//Miami Dolphins
+        cityNameMap.put("Baltimore", "Baltimore");//Baltimore Ravens
+        cityNameMap.put("Cincinnati", "Cincinnati");//Cincinnati Bengals
+        cityNameMap.put("Cleveland", "Cleveland");//Cleveland Browns
+        cityNameMap.put("Pittsburgh", "Pittsburgh");//Pittsburgh Steelers
+        cityNameMap.put("Houston", "Houston");//Houston Texans
+        cityNameMap.put("Indianapolis", "Indianapolis");//Indianapolis Colts
+        cityNameMap.put("Jacksonville", "Jacksonville");//Jacksonville Jaguars
+        cityNameMap.put("Tennessee", "Tennessee");//Tennessee Titans
+        cityNameMap.put("Denver", "Denver");//Denver Broncos
+        cityNameMap.put("Kansas City", "Kansas City");//Kansas City Chiefs
+        cityNameMap.put("Las Vegas", "Las Vegas");//Los Angeles Chargers and Los angeles Rams
+        cityNameMap.put("Philadelphia", "Philadelphia");//Philadelphia Eagles
+        cityNameMap.put("Chicago", "Chicago");//Chicago Bears
+        cityNameMap.put("Detroit", "Detroit");//Detroit Lions
+        cityNameMap.put("Green Bay", "Green Bay");//Green Bay Packers
+        cityNameMap.put("Minnesota", "Minnesota");
+        cityNameMap.put("Atlanta", "Atlanta");//Atlanta Falcons
+        cityNameMap.put("New Orleans", "New Orleans");//New Orleans Saints
+        cityNameMap.put("Los Angeles", "Los Angeles");//Los Angeles Rams
+        cityNameMap.put("San Francisco", "San Francisco");//San Francisco 49ers
+        cityNameMap.put("Seattle", "Seattle");//Seattle Seahawks
+
+    }
+
 }
