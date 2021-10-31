@@ -2,11 +2,12 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 211010
+ * version 211031
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import javax.swing.*;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 public class Main extends JComponent
 {
-    private static String version = "211010";
+    private static String version = "211031";
     private String nflRandomWeekURL = "https://www.covers.com/sports/nfl/matchups";
     private XSSFWorkbook sportDataWorkbook;
     private String deskTopPath = "/Users/vicwintriss/git/Covers/SportData.xlsx"; //System.getProperty("user.home") + "/Desktop";/* User's desktop path */
@@ -32,6 +33,10 @@ public class Main extends JComponent
     private Elements thisMatchupConsensusElements;
     private int globalMatchupIndex = 3;
     private String thisSeason = "2021";
+    private Elements thisMatchupOddsElements;
+    private Elements oddsElements;
+    private Elements american;
+
     public static void main(String[] args) throws IOException, ParseException
     {
         System.out.println("SharpMarkets, version " + version + ", Copyright 2021 Dan Farris");
@@ -49,19 +54,20 @@ public class Main extends JComponent
         dataCollector.collectSeasonInfo(nflHistoryElements);//Builds HashMaps and ArrayLists for this season from Covers.com
         //for (String thisWeekDate : thisSeasonDates)//Process all matchups in this season....OUTER LOOP
         {
-            String thisWeekDate = "2021-09-23";
-            thisWeekDate = JOptionPane.showInputDialog("Enter NFL week code");
-            thisWeekDate = "2021-10-07";
+            String thisWeekDate = JOptionPane.showInputDialog("Enter NFL week code");
+            thisWeekDate = "2021-10-14";
             System.out.println("47 Main NEW WEEK => " + thisWeekDate);
             thisWeekElements = webSiteReader.readCleanWebsite("https://www.covers.com/sports/nfl/matchups?selectedDate=" + thisWeekDate);//Get all of this week's games info
             dataCollector.collectThisWeekMatchups(thisWeekElements);
-            Elements oddsElements = webSiteReader.readCleanWebsite("https://www.covers.com/sport/football/nfl/odds");//Info as of the NFL week effective when logging into Covers
-            Elements american = oddsElements.select(".covers-CoversOdds-mainTR .covers-CoversMatchups-centerAlignHelper");
-            OddsCollector.collectThisWeekOdds(thisWeekDate, american);
-            sportDataWorkbook = excelReader.readSportData();
+            oddsElements = webSiteReader.readCleanWebsite("https://www.covers.com/sport/football/nfl/odds");//Info as of the NFL week effective when logging into Covers
+            Document oddsDoc = webSiteReader.getDirtyDoc();
+            OddsCollector.collectThisWeekOdds(thisWeekDate, oddsElements, oddsDoc);
+            //sportDataWorkbook = excelReader.readSportData();
             ArrayList<String> thisWweekMatchupIDs = dataCollector.getThisWeekMatchupIDs();
-            for (String thisMatchupId : thisWweekMatchupIDs)////Process all matchups in this week...INNER LOOP
+            //for (String thisMatchupId : thisWweekMatchupIDs)////Process all matchups in this week...INNER LOOP
             {
+                String thisMatchupId = "83428";
+                System.out.println(dataCollector.getGameIdentifierMap().get(thisMatchupId) + ", matchupID => " + thisMatchupId);
                 thisMatchupConsensusElements = webSiteReader.readCleanWebsite("https://contests.covers.com/consensus/matchupconsensusdetails?externalId=%2fsport%2ffootball%2fcompetition%3a" + thisMatchupId);
                 dataCollector.collectConsensusData(thisMatchupConsensusElements, thisMatchupId);
                 excelBuilder.setThisWeekAwayTeamsMap(dataCollector.getThisWeekAwayTeamsMap());
@@ -75,7 +81,7 @@ public class Main extends JComponent
                 excelBuilder.setCompleteAwayTeamName(dataCollector.getAwayTeamCompleteName());
                 excelBuilder.setGameIdentifier(dataCollector.getGameIdentifierMap().get(thisMatchupId));
                 excelBuilder.buildExcel(sportDataWorkbook, thisMatchupId, globalMatchupIndex, dataCollector.getGameIdentifierMap().get(thisMatchupId));
-                System.out.println("66 Main NEW MATCHUP => " + dataCollector.getGameIdentifierMap().get(thisMatchupId));
+                thisMatchupOddsElements = webSiteReader.readCleanWebsite("https://www.covers.com/sport/football/nfl/odds");
                 globalMatchupIndex++;
             }
             excelWriter.openOutputStream();

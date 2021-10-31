@@ -9,7 +9,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="version 211010" />
+    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="version 211010">
+      <change beforePath="$PROJECT_DIR$/my-project-name.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.ipr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-project-name.iws" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/OddsCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/OddsCollector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/WebSiteReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/WebSiteReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/OddsCollector.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/OddsCollector.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/WebSiteReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/WebSiteReader.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,6 +52,16 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelReader.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/wintrisstech/WebSiteReader.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/wintrisstech/OddsCollector.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/pom.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelWriter.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="InvalidFacetManager">
     <ignored-facets>
@@ -80,7 +101,7 @@
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.1605325" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
@@ -740,7 +761,14 @@
       <option name="project" value="LOCAL" />
       <updated>1633926039945</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="version 211010">
+      <created>1633926351923</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1633926351928</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -768,6 +796,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
@@ -800,16 +829,8 @@
     <MESSAGE value="version 211010" />
     <option name="LAST_COMMIT_MESSAGE" value="version 211010" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelReader.java</url>
-          <line>14</line>
-          <properties field="is" class="com.wintrisstech.ExcelReader" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
