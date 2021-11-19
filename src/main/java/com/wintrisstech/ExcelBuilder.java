@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 211031
+ * version 211111
  *******************************************************************/
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -12,6 +12,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.awt.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 
 import static org.apache.poi.ss.usermodel.HorizontalAlignment.CENTER;
@@ -44,6 +46,7 @@ public class ExcelBuilder
     public XSSFWorkbook buildExcel(XSSFWorkbook sportDataWorkbook, String dataEventID, int eventIndex, String gameIdentifier)
     {
         sportDataSheet = sportDataWorkbook.getSheet("Data");
+        String time = LocalDate.now() + " " + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute();
         CellStyle leftStyle = sportDataWorkbook.createCellStyle();
         leftStyle.setAlignment(LEFT);
         CellStyle centerStyle = sportDataWorkbook.createCellStyle();
@@ -65,6 +68,8 @@ public class ExcelBuilder
         sportDataSheet.getRow(eventIndex).createCell(0);
         sportDataSheet.getRow(eventIndex).getCell(0).setCellStyle(leftStyle);
         sportDataSheet.getRow(eventIndex).getCell(0).setCellStyle(redStyle);
+        sportDataSheet.getRow(0).getCell(0).setCellValue(time);
+        System.out.println("**************> " + time);
         sportDataSheet.getRow(eventIndex).getCell(0).setCellValue(gameIdentifier);
         sportDataSheet.getRow(eventIndex).createCell(1);
         sportDataSheet.getRow(eventIndex).getCell(1).setCellStyle(centerStyle);

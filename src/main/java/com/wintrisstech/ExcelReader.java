@@ -2,15 +2,19 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 211031
+ * version 211107
  * Read large SportData excel work book (SportData.xlsx) on user's desktop and return workBook
  *******************************************************************/
+
+import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.io.*;
+
+import java.io.FileInputStream;
+import java.io.InputStream;
 public class ExcelReader
 {
-    private String deskTopPath = "/Users/vicwintriss/Desktop/SportData.xlsx";//System.getProperty("user.home") + "/Desktop";/* User's desktop path */
+    private String deskTopPath = "/Users/vicwintriss/Desktop/SportData.xlsx";
     private XSSFWorkbook sportDataWorkbook;
     private InputStream is;
     public XSSFWorkbook readSportData()
@@ -18,6 +22,7 @@ public class ExcelReader
         try
         {
             is = new FileInputStream(deskTopPath);
+            ZipSecureFile.setMinInflateRatio(0);//To prevent zip bomb exception
             sportDataWorkbook = (XSSFWorkbook) WorkbookFactory.create(is);
             is.close();
         }
