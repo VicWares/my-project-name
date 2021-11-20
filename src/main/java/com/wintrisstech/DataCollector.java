@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 211111
+ * version 211120
  * Builds data event id array and calendar date array
  *******************************************************************/
 
@@ -67,11 +67,9 @@ public class DataCollector {
     private HashMap<String, String> idXref = new HashMap<>();
     private static String[] bet365OddsArray = new String[6];
 
-    public void collectThisWeekMatchups(Elements thisWeekIdElements)//From covers.com website for this week's matchups
+    public void collectThisWeekMatchups(Elements thisWeekElements)//From covers.com website for this week's matchups
     {
-        thisWeekMatchupIDlist = new ArrayList<>();
-        thisWeekMatchupElements = thisWeekIdElements;
-        for (Element e : thisWeekMatchupElements)//Build week matchup IDs array
+        for (Element e : thisWeekElements)//Build week matchup IDs array
         {
             homeTeamFullName = e.attr("data-home-team-fullname-search");//e.g. Houston
             homeTeamNickname = e.attr("data-home-team-nickname-search");//e.g. Texans
@@ -101,20 +99,26 @@ public class DataCollector {
             thisGameWeekNumbers.add(thisWeek);
             thisWeekMatchupIDlist.add(thisMatchupID);
             int i = 0;
-            for (Element ee : thisWeekIdElements)
+            String[] dataLinkElementsSplit = null;
+            for (Element ee : thisWeekElements)
             {
-                String dataLinkString = thisWeekIdElements.attr("data-link-id");
-                System.out.println(dataLinkString);
-                String[] dlsa = dataLinkString.split("/");
-//                System.out.println(dlsa[5]);
-//                idXref.put("11111", dlsa[5]);
-                System.out.println(idXref.keySet());
+                String dataLinkElements = ee.attr("data-link").toString();
+                dataLinkElementsSplit =  dataLinkElements.split("/");
+
+//                idXref.put("11111", dataLinkElementsSplit[5]);
+//                idXref.put("11111", dataLinkElementsSplit[5]);
+//                System.out.println(idXref.keySet());
             }
+            for (String s : dataLinkElementsSplit)
+            {
+                System.out.println(s);
+            }
+            System.out.println();
         }
-        for (String s : gameIdentifierMap.keySet()) {
-            System.out.print(s);
-            System.out.println(" " + gameIdentifierMap.get(s));
-        }
+//        for (String s : gameIdentifierMap.keySet()) {
+//            System.out.print(s);
+//            System.out.println(" " + gameIdentifierMap.get(s));
+//        }
     }
     public void collectConsensusData(Elements thisMatchupConsensus, String thisMatchupID) {
         this.thisMatchupID = thisMatchupID;

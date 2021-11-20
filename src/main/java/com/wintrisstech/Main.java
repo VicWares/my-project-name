@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 211111
+ * version 211120
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
@@ -16,7 +16,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 public class Main extends JComponent {
-    private static String version = "211111";
+    private static String version = "211120";
     private String nflRandomWeekURL = "https://www.covers.com/sports/nfl/matchups";
     private XSSFWorkbook sportDataWorkbook;
     private String deskTopPath = "/Users/vicwintriss/git/Covers/SportData.xlsx";
