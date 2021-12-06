@@ -9,18 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="version 211120&#10;Still trying to build data-game-id/datagame xref map...poblems with auth...">
+    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="ver 211205 Getting odds data">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/.idea/runConfigurations.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my-project-name.iws" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/WebSiteReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/WebSiteReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/DataCollector.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/DataCollector.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/ExcelBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/ExcelBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/ExcelWriter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/ExcelWriter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -809,7 +803,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637437829883</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="ver 211205 Getting odds data">
+      <created>1638767482265</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1638767482266</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -843,7 +844,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version 210417, getting home and away team" />
     <MESSAGE value="version 210426, starting to get all games in an NFL week" />
     <MESSAGE value="version 210427, woking on iterating all weeks, all games." />
     <MESSAGE value="version 210430...finally reading all matchup data-event-ids" />
@@ -868,7 +868,8 @@
     <MESSAGE value="version 211111&#10;Trying to build data-game-id/datagame xref map" />
     <MESSAGE value="version 211120&#10;Still trying to build data-game-id/datagame xref map!" />
     <MESSAGE value="version 211120&#10;Still trying to build data-game-id/datagame xref map...poblems with auth..." />
-    <option name="LAST_COMMIT_MESSAGE" value="version 211120&#10;Still trying to build data-game-id/datagame xref map...poblems with auth..." />
+    <MESSAGE value="ver 211205 Getting odds data" />
+    <option name="LAST_COMMIT_MESSAGE" value="ver 211205 Getting odds data" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

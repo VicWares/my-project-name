@@ -149,7 +149,7 @@ public class DataCollector
        }
        catch (Exception e)
        {
-           System.out.println("end of team playing this week");;
+           System.out.println("DC152 End of odds collecting.  " + i + " teams played this week");
        }
         //while (true)
 //        {
