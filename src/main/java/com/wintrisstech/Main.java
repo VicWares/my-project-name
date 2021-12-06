@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 211120
+ * version 211205
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
@@ -16,22 +16,19 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 public class Main extends JComponent {
-    private static String version = "211120";
-    private String nflRandomWeekURL = "https://www.covers.com/sports/nfl/matchups";
+    private static String version = "211205";
     private XSSFWorkbook sportDataWorkbook;
-    private String deskTopPath = "/Users/vicwintriss/git/Covers/SportData.xlsx";
-    private HashMap<String, String> weekList = new HashMap<>();
+    private HashMap<String, String> weekNumberMap = new HashMap<>();
     private HashMap<String, String> cityNameMap = new HashMap<>();
     public DataCollector dataCollector = new DataCollector();
     public WebSiteReader webSiteReader = new WebSiteReader();
     public ExcelReader excelReader = new ExcelReader();
     public ExcelBuilder excelBuilder = new ExcelBuilder();
     public ExcelWriter excelWriter = new ExcelWriter();
-    private Elements thisWeekElements;
+    private Elements weekElements;
     private Elements seasonMatchupElements;
-    private Elements selectedMatchupConsensusElements;
+    private Elements consensusElements;
     private int globalMatchupIndex = 3;
-    private String thisSeason = "2021";
     private Elements oddsElements;
     private String awayOdds;
     public static void main(String[] args) throws IOException, ParseException {
@@ -40,30 +37,28 @@ public class Main extends JComponent {
         main.initialize();//Get out of static context
     }
     private void initialize() throws IOException {
-        fillCityNameMap();//Correct for Covers variations in team city names
+        fillCityNameMap();//Builds full city name map to correct for Covers variations in team city names
+        fillWeekNumberMap();
         dataCollector.setCityNameMap(cityNameMap);
-        ArrayList<String> thisSeasonDates = new ArrayList<>();
-        fillSeasonDatesList(thisSeasonDates);//Puts all week dates into thisSeasonDates
-        dataCollector.setThisSeason(thisSeason);//2021 for now TODO:make user selectable
-        seasonMatchupElements = webSiteReader.readCleanWebsite("https://www.covers.com/sports/nfl/matchups");//Gets all NFL season beginning date history and this season year info.
-        dataCollector.collectSeasonInfo(seasonMatchupElements);//Builds HashMaps and ArrayLists for this season from Covers.com
-        String thisWeekDate = JOptionPane.showInputDialog("Enter NFL week code");
-        thisWeekDate = "2021-11-18";
-        System.out.println("Main 60, new week => " + thisWeekDate);
-        thisWeekElements = webSiteReader.readCleanWebsite("https://www.covers.com/sports/nfl/matchups?selectedDate=" + thisWeekDate);//Get all of this week's games info
-        Elements thisWeekIdElements = thisWeekElements.select(".cmg_game_data, .cmg_matchup_game_box");//Trying to get data-event and data-game for xref
-        System.out.println("data-game elements for this week.size() => " + thisWeekIdElements.size());
-        dataCollector.collectThisWeekMatchups(thisWeekIdElements);
+        String weekNumber = JOptionPane.showInputDialog("Enter NFL week number");
+        weekNumber = "13";
+        String weekDate = weekNumberMap.get(weekNumber);
+        System.out.println("Main46..................................................... week number => " + weekNumber);
+        Elements nflElements = webSiteReader.readCleanWebsite("https://www.covers.com/sports/nfl/matchups");
+        Elements weekElements = nflElements.select(".cmg_game_data, .cmg_matchup_game_box");
+        System.out.println("Main49*****************************************************data-game elements for week.size() => " + weekElements.size());
+        dataCollector.collectThisWeekMatchups(weekElements);
         sportDataWorkbook = excelReader.readSportData();
-        ArrayList<String> thisWweekMatchupIDlist = dataCollector.getThisWeekMatchupIDs();
+        ArrayList<String> matchuplist = dataCollector.getMatchups();
         oddsElements = webSiteReader.readCleanWebsite("https://www.covers.com/sport/football/nfl/odds");//Info from log-in date through the present NFL week
-        for (String selectedMatchup : thisWweekMatchupIDlist)////Process all matchups in this week...INNER LOOP*******************************************INNNER LOOP**********SELECT INDIVIDUAL MATCHUP ID FOR PROCESSING*******************************************************************INNER LOOP
-        {
-            dataCollector.collectThisWeekOdds(oddsElements, selectedMatchup);
-            System.out.println("\n*> Main 62, working new game: " + dataCollector.getGameIdentifierMap().get(selectedMatchup) + ", ID => " + selectedMatchup + ", Date => " + dataCollector.getGameDatesMap().get(selectedMatchup));
-            System.out.println("Main 63 *************************************************************************************************************");
-            selectedMatchupConsensusElements = webSiteReader.readCleanWebsite("https://contests.covers.com/consensus/matchupconsensusdetails?externalId=%2fsport%2ffootball%2fcompetition%3a" + selectedMatchup);
-            dataCollector.collectConsensusData(selectedMatchupConsensusElements, selectedMatchup);
+        dataCollector.collectThisWeekOdds(oddsElements);
+        //for (String matchup : matchuplist)////Process all matchups in this week...INNER LOOP*******************************************INNNER LOOP**********SELECT INDIVIDUAL MATCHUP ID FOR PROCESSING*******************************************************************INNER LOOP
+        {String matchup = "83592";
+            System.out.println("***INNNER LOOP*****matchup => " + matchup);
+            System.out.println("\n*> Main61, working new game: " + dataCollector.getGameIdentifierMap().get(matchup) + ", ID => " + matchup + ", Date => " + dataCollector.getGameDatesMap().get(matchup));
+            System.out.println("Main62*************************************************************************************************************");
+            consensusElements = webSiteReader.readCleanWebsite("https://contests.covers.com/consensus/matchupconsensusdetails?externalId=%2fsport%2ffootball%2fcompetition%3a" + matchup);
+            dataCollector.collectConsensusData(consensusElements, matchup);
             excelBuilder.setThisWeekAwayTeamsMap(dataCollector.getThisWeekAwayTeamsMap());
             excelBuilder.setHomeTeamsMap(dataCollector.getThisWeekHomeTeamsMap());
             excelBuilder.setGameDatesMap(dataCollector.getGameDatesMap());
@@ -73,8 +68,8 @@ public class Main extends JComponent {
             excelBuilder.setOuUndersMap(dataCollector.getOuUndersMap());
             excelBuilder.setCompleteHomeTeamName(dataCollector.getHomeTeamCompleteName());
             excelBuilder.setCompleteAwayTeamName(dataCollector.getAwayTeamCompleteName());
-            excelBuilder.setGameIdentifier(dataCollector.getGameIdentifierMap().get(selectedMatchup));
-            excelBuilder.buildExcel(sportDataWorkbook, selectedMatchup, globalMatchupIndex, dataCollector.getGameIdentifierMap().get(selectedMatchup));
+            excelBuilder.setGameIdentifier(dataCollector.getGameIdentifierMap().get(matchup));
+            excelBuilder.buildExcel(sportDataWorkbook, matchup, globalMatchupIndex, dataCollector.getGameIdentifierMap().get(matchup));
             globalMatchupIndex++;
         }
         excelWriter.openOutputStream();
@@ -82,29 +77,8 @@ public class Main extends JComponent {
         excelWriter.closeOutputStream();
         System.out.println("Proper Finish...HOORAY!");
     }
-    private void fillSeasonDatesList(ArrayList<String> thisSeasonDates) {
-        thisSeasonDates.add("2021-09-09");//Season start...Week 1
-        thisSeasonDates.add("2021-09-16");
-        thisSeasonDates.add("2021-09-23");
-        thisSeasonDates.add("2021-09-30");
-        thisSeasonDates.add("2021-10-07");
-        thisSeasonDates.add("2021-10-14");
-        thisSeasonDates.add("2021-10-21");
-        thisSeasonDates.add("2021-10-28");
-        thisSeasonDates.add("2021-11-04");
-        thisSeasonDates.add("2021-11-11");
-        thisSeasonDates.add("2021-11-18");
-        thisSeasonDates.add("2021-11-25");
-        thisSeasonDates.add("2021-12-02");
-        thisSeasonDates.add("2021-12-09");
-        thisSeasonDates.add("2021-12-16");
-        thisSeasonDates.add("2021-12-23");
-        thisSeasonDates.add("2022-01-02");
-        thisSeasonDates.add("2022-01-09");
-        thisSeasonDates.add("2022-02-06");
-    }
-
-    private void fillCityNameMap() {
+    private void fillCityNameMap()
+    {
         cityNameMap.put("Minneapolis", "Minnesota");//Minnesota Vikings
         cityNameMap.put("Tampa", "Tampa Bay");//Tampa Bay Buccaneers
         cityNameMap.put("Tampa Bay", "Tampa Bay");//Tampa Bay Buccaneers
@@ -145,7 +119,27 @@ public class Main extends JComponent {
         cityNameMap.put("Los Angeles", "Los Angeles");//Los Angeles Rams
         cityNameMap.put("San Francisco", "San Francisco");//San Francisco 49ers
         cityNameMap.put("Seattle", "Seattle");//Seattle Seahawks
-
     }
-
+    private void fillWeekNumberMap()
+    {
+        weekNumberMap.put("1", "2021-09-09");//Season start...Week 1
+        weekNumberMap.put("2", "2021-09-16");
+        weekNumberMap.put("3", "2021-09-23");
+        weekNumberMap.put("4", "2021-09-30");
+        weekNumberMap.put("5", "2021-10-07");
+        weekNumberMap.put("6","2021-10-14");
+        weekNumberMap.put("7","2021-10-21");
+        weekNumberMap.put("8","2021-10-28");
+        weekNumberMap.put("9","2021-11-04");
+        weekNumberMap.put("10","2021-11-11");
+        weekNumberMap.put("11","2021-11-18");
+        weekNumberMap.put("12","2021-11-25");
+        weekNumberMap.put("13","2021-12-02");
+        weekNumberMap.put("14","2021-12-09");
+        weekNumberMap.put("15","2021-12-16");
+        weekNumberMap.put("16","2021-12-23");
+        weekNumberMap.put("17","2022-01-02");
+        weekNumberMap.put("18","2022-01-09");
+        weekNumberMap.put("19","2022-02-06");
+    }
 }

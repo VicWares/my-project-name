@@ -8,7 +8,7 @@ import java.io.OutputStream;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 211120
+ * version 211205
  * write new NFL Covers data to the large SportData Excel sheet
  *******************************************************************/
 public class ExcelWriter
@@ -17,7 +17,7 @@ public class ExcelWriter
     private OutputStream os;
     public void writeSportData(XSSFWorkbook sportDataWorkbook)
     {
-        System.out.println("Writing to desktop");
+        System.out.println("EW20 Writing to desktop");
         try
         {
             sportDataWorkbook.write(os);

@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 211120
+ * version 211205
  *******************************************************************/
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -68,8 +68,8 @@ public class ExcelBuilder
         sportDataSheet.getRow(eventIndex).createCell(0);
         sportDataSheet.getRow(eventIndex).getCell(0).setCellStyle(leftStyle);
         sportDataSheet.getRow(eventIndex).getCell(0).setCellStyle(redStyle);
-        sportDataSheet.getRow(0).getCell(0).setCellValue(time);
-        System.out.println("**************> " + time);
+        //sportDataSheet.getRow(0).getCell(0).setCellValue(time);
+        //System.out.println("ER72**************> " + time);
         sportDataSheet.getRow(eventIndex).getCell(0).setCellValue(gameIdentifier);
         sportDataSheet.getRow(eventIndex).createCell(1);
         sportDataSheet.getRow(eventIndex).getCell(1).setCellStyle(centerStyle);
