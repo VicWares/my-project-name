@@ -9,12 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="Version 211205&#10;Getting all odds teams">
+    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="Version 211207&#10;working on getting odds...xRef Map added">
       <change beforePath="$PROJECT_DIR$/my-project-name.iws" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/DataCollector.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/DataCollector.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +33,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="github.com/sdvic/CoversKeith.git" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -470,13 +466,6 @@
       <workItem from="1632534768500" duration="2357000" />
       <workItem from="1633195616838" duration="20000" />
     </task>
-    <task id="LOCAL-00003" summary="Filling small xlsx&#10;version 2102012A">
-      <created>1613193278460</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1613193278460</updated>
-    </task>
     <task id="LOCAL-00004" summary="Filling small xlsx columns 60 &amp; 62&#10;version 2102014">
       <created>1613368736049</created>
       <option name="number" value="00004" />
@@ -813,7 +802,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638854935184</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Version 211207&#10;working on getting odds...xRef Map added">
+      <created>1638940844975</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1638940844976</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -851,7 +847,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version 210427, woking on iterating all weeks, all games." />
     <MESSAGE value="version 210430...finally reading all matchup data-event-ids" />
     <MESSAGE value="version 210508...using regex for team names...bad!" />
     <MESSAGE value="version 210508A...ready to read/write sportsData." />
@@ -876,7 +871,8 @@
     <MESSAGE value="version 211120&#10;Still trying to build data-game-id/datagame xref map...poblems with auth..." />
     <MESSAGE value="ver 211205 Getting odds data" />
     <MESSAGE value="Version 211205&#10;Getting all odds teams" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 211205&#10;Getting all odds teams" />
+    <MESSAGE value="Version 211207&#10;working on getting odds...xRef Map added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 211207&#10;working on getting odds...xRef Map added" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
