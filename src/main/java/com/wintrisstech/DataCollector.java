@@ -131,19 +131,20 @@ public class DataCollector
         atsAwaysMap.put(thisMatchupID, atsHome);
     }
 
-    public static void collectThisWeekOdds(Elements oddsElements)
+    public static void collectThisWeekOdds( Elements oddsElements, ArrayList<String> matchupElements, HashMap<String, String> xRefMap)
     {
+        System.out.println(xRefMap);
         int i = 0;
         thisWeekMatchuplist = new ArrayList<>();
-        Elements table = oddsElements.select("table > tbody > tr:nth-child(9)");//Column 9 is bet365
        try
        {
            while(true)
            {
-               Elements tdsInSecondRow = oddsElements.select("table tr:eq(" + i + ") > td");
-               Elements shortNames = tdsInSecondRow.select(".__shortname");
+               Elements tab = oddsElements.select("table tr:eq(" + i + ") > td");
+               Elements shortNames = tab.select(".__shortname");
                System.out.print(shortNames.get(0).text() + " at ");
                System.out.println(shortNames.get(1).text());
+               System.out.println("DC146 away odds for id  "+  matchupElements.get(i) + " = " + tab.select(".__oddValue").get(0).text());
                i++;
            }
        }
