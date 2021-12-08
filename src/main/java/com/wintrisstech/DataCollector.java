@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 211205
+ * version 211208
  * Builds data event id array and calendar date array
  *******************************************************************/
 
@@ -35,7 +35,7 @@ public class DataCollector
     private static HashMap<String, String> awayFractionalOddsMap = new HashMap<>();
     private static Iterable<? extends Element> thisWeekMatchupElements;
     private static int rowCounter;
-    private String thisMatchup;
+    private static String thisMatchup;
     private String homeTeamNickname;//e.g. Browns...data-home-team-nickname-search
     private String awayTeamNickname;//e.g Texans...data-away-team-nickname-search
     private static String awayTeamFullName;//e.g. Cleveland...data-home-team-fullname-search
@@ -133,19 +133,20 @@ public class DataCollector
 
     public static void collectThisWeekOdds( Elements oddsElements, ArrayList<String> matchupElements, HashMap<String, String> xRefMap)
     {
-        System.out.println(xRefMap);
         int i = 0;
         thisWeekMatchuplist = new ArrayList<>();
        try
        {
            while(true)
            {
-               Elements tab = oddsElements.select("table tr:eq(" + i + ") > td");
-               Elements shortNames = tab.select(".__shortname");
-               System.out.print(shortNames.get(0).text() + " at ");
-               System.out.println(shortNames.get(1).text());
-               System.out.println("DC146 away odds for id  "+  matchupElements.get(i) + " = " + tab.select(".__oddValue").get(0).text());
-               i++;
+               Elements row = oddsElements.select("table tr:eq(" + i++ + ") > td");//Select rows...each row a different game
+               Elements shortNames = row.select(".__shortname");
+               String awayTeam = shortNames.get(0).text();
+               String homeTeam = shortNames.get(1).text();
+               Elements column = row.select("td:eq(9)");
+               String homeOdds = column.select("span:first-child").get(5).text();
+               String awayOdds = column.select("span:first-child").get(0).text();
+               System.out.println("=* homeOdds for " + homeTeam + " is " + homeOdds + " awayOdds for " + awayTeam + " is " + awayOdds);
            }
        }
        catch (Exception e)
