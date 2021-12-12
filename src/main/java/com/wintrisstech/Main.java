@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 211208
+ * version 211211
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
@@ -14,12 +14,11 @@ import org.jsoup.select.Elements;
 import javax.swing.*;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Main extends JComponent
 {
-    private static String version = "211208";
+    private static String version = "211211";
     private XSSFWorkbook sportDataWorkbook;
     private HashMap<String, String> weekNumberMap = new HashMap<>();
     private HashMap<String, String> cityNameMap = new HashMap<>();
@@ -34,7 +33,8 @@ public class Main extends JComponent
     private Elements consensusElements;
     private int globalMatchupIndex = 3;
     private Elements oddsElements;
-    private String awayOdds;
+    private String MLhomeOdds;
+    private String MLawayOdds;
 
     public static void main(String[] args) throws IOException, ParseException
     {
@@ -49,7 +49,7 @@ public class Main extends JComponent
         fillWeekNumberMap();
         dataCollector.setCityNameMap(cityNameMap);
         String weekNumber = JOptionPane.showInputDialog("Enter NFL week number");
-        weekNumber = "14";
+        weekNumber = "15";
         String weekDate = weekNumberMap.get(weekNumber);
         System.out.println("Main46..................................................... week number => " + weekNumber);
         Elements nflElements = webSiteReader.readCleanWebsite("https://www.covers.com/sports/nfl/matchups");
@@ -58,9 +58,9 @@ public class Main extends JComponent
         xRefMap = buildXref(weekElements);
         dataCollector.collectThisWeekMatchups(weekElements);
         sportDataWorkbook = excelReader.readSportData();
-        ArrayList<String> matchuplist = dataCollector.getMatchups();
         oddsElements = webSiteReader.readCleanWebsite("https://www.covers.com/sport/football/nfl/odds");//Info from log-in date through the present NFL week
-        dataCollector.collectThisWeekOdds(oddsElements, dataCollector.getMatchups(), xRefMap);
+        dataCollector.collectThisWeekOdds(oddsElements, xRefMap);
+        System.out.println("M65 homeOdds " + dataCollector.getMLhomeOdds() + " awayOdds " + dataCollector.getMLawayOdds());
         //for (String matchup : matchuplist)////Process all matchups in this week...INNER LOOP*******************************************INNNER LOOP**********SELECT INDIVIDUAL MATCHUP ID FOR PROCESSING*******************************************************************INNER LOOP
         {
             String matchup = "83592";
