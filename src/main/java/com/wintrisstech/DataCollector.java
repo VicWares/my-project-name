@@ -2,16 +2,14 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 2112011
+ * version 2112012
  * Builds data event id array and calendar date array
  *******************************************************************/
-
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 public class DataCollector
 {
     private static HashMap<String, String> thisWeekTeams = new HashMap<>();
@@ -99,10 +97,8 @@ public class DataCollector
             thisWeekHomeTeamScores.add(homeTeamScore);
             thisWeekAwayTeamScores.add((awayTeamScore));
             thisGameWeekNumbers.add(thisWeek);
-            thisWeekMatchuplist.add(thisMatchup);
         }
     }
-
     public void collectConsensusData(Elements thisMatchupConsensus, String thisMatchupID)
     {
         this.thisMatchup = thisMatchupID;
@@ -119,8 +115,7 @@ public class DataCollector
             atsHome = leftConsensus.select("div").get(0).text();
             atsAway = rightConsensus.select("div").get(0).text();
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             System.out.println("DC121 DataCollector, no consensus data for " + gameIdentifier);
         }
         ouOversMap.put(thisMatchupID, ouOver);
@@ -128,92 +123,74 @@ public class DataCollector
         atsHomesMap.put(thisMatchupID, atsAway);
         atsAwaysMap.put(thisMatchupID, atsHome);
     }
-
-    public void collectThisWeekOdds( Elements oddsElements, HashMap<String, String> xRefMap)
+    public void collectThisWeekOdds(Elements oddsElements, HashMap<String, String> xRefMap, String dataEventId)
     {
         int i = 0;
-        thisWeekMatchuplist = new ArrayList<>();
-       try
-       {
-           for (var entry : xRefMap.entrySet())
-           {
-               String dataGame = "244420";
-               Elements row = oddsElements.select("table tr:eq(" + i++ + ") > td");//Select rows...each row a different game
-               Element dataGameElements = oddsElements.select("[data-game*=" + dataGame + "]").get(10);//Bet365
-               Elements shortNames = row.select(".__shortname");
-               String awayTeam = shortNames.get(0).text();//Away team
-               String homeTeam = shortNames.get(1).text();//Home team
-               Elements column = row.select("td:eq(9)");
-               this.MLhomeOdds = dataGameElements.select(".__american, span, first-child").get(6).text();//Home odds
-               this.MLawayOdds = dataGameElements.select(".__american, span, first-child").get(0).text();//Away odds
-               //this.MLawayOdds = column.select("span:first-child").get(0).text();
-               System.out.println("DC148=* homeOdds for " + homeTeam + " is " + getMLhomeOdds() + " awayOdds for " + awayTeam + " is " + getMLawayOdds());
-           }
-       }
-       catch (Exception e)
-       {
-           System.out.println("DC152 End of odds collecting.  " + i + " teams played this week");
-       }
+        String dataGame = xRefMap.get(dataEventId);
+        Elements row = oddsElements.select("table tr:eq(" + i++ + ") > td");//Select rows...each row a different game
+        Element dataGameElements = oddsElements.select("[data-game*=" + dataGame + "]").get(10);//Bet365
+        Elements shortNames = row.select(".__shortname");
+        String awayTeam = shortNames.get(0).text();//Away team
+        String homeTeam = shortNames.get(1).text();//Home team
+        Elements column = row.select("td:eq(9)");
+        this.MLhomeOdds = dataGameElements.select(".__american, span, first-child").get(6).text();//Home odds
+        this.MLawayOdds = dataGameElements.select(".__american, span, first-child").get(0).text();//Away odds
+        System.out.println("DC144 MLhomeOdds for " + homeTeam + " is " + getMLhomeOdds() + " MLawayOdds for " + awayTeam + " is " + getMLawayOdds());
     }
     public HashMap<String, String> getThisWeekHomeTeamsMap()
     {
         return thisWeekHomeTeamsMap;
     }
-
     public HashMap<String, String> getThisWeekAwayTeamsMap()
     {
         return thisWeekAwayTeamsMap;
     }
-
     public HashMap<String, String> getGameDatesMap()
     {
         return gameDatesMap;
     }
-
     public HashMap<String, String> getAtsHomesMap()
     {
         return atsHomesMap;
     }
-
     public HashMap<String, String> getAtsAwaysMap()
     {
         return atsAwaysMap;
     }
-
     public HashMap<String, String> getOuOversMap()
     {
         return ouOversMap;
     }
-
     public HashMap<String, String> getOuUndersMap()
     {
         return ouUndersMap;
     }
-
     public HashMap<String, String> getGameIdentifierMap()
     {
         return gameIdentifierMap;
     }
-
     public void setThisSeason(String thisSeason)
     {
         this.thisSeason = thisSeason;
     }
-
     public String getAwayTeamCompleteName()
     {
         return awayTeamCompleteName;
     }
-
     public String getHomeTeamCompleteName()
     {
         return homeTeamCompleteName;
     }
-
     public void setCityNameMap(HashMap<String, String> cityNameMap)
     {
         this.cityNameMap = cityNameMap;
     }
-    public String getMLhomeOdds() {return this.MLhomeOdds;}
-    public String getMLawayOdds() {return this.MLawayOdds;}
+    public String getMLhomeOdds()
+    {
+        return this.MLhomeOdds;
+    }
+    public String getMLawayOdds()
+    {
+        return this.MLawayOdds;
+    }
 }
