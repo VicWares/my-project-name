@@ -9,13 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="Version 211212&#10;Clean up...single main loop for odds and consednsus...but broke it!">
-      <change beforePath="$PROJECT_DIR$/my-project-name.iws" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/DataCollector.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/DataCollector.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" afterDir="false" />
-    </list>
+    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="Version 211212&#10;Clean up...single main loop for odds and consednsus...but broke it!" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -470,13 +464,6 @@
       <workItem from="1632534768500" duration="2357000" />
       <workItem from="1633195616838" duration="20000" />
     </task>
-    <task id="LOCAL-00010" summary="version 210318...CleanUp working...no executable jar">
-      <created>1616095044123</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1616095044124</updated>
-    </task>
     <task id="LOCAL-00011" summary="version 210319...Adding date info correctly...no executable jar">
       <created>1616205584777</created>
       <option name="number" value="00011" />
@@ -813,7 +800,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639354766770</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Version 211212&#10;Clean up...single main loop for odds and consednsus...but broke it!">
+      <created>1639460153356</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1639460153358</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
