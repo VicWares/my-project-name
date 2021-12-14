@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 211212
+ * version 211213
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
@@ -63,15 +63,13 @@ public class Main extends JComponent
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< MAIN LOOP.............................MAIN LOOP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> processing all mtchups this week
         for (Map.Entry<String, String> entry : xRefMap.entrySet())
         {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            String matchup = key;
+            String matchup = entry.getKey();
             System.out.println("Main68, working new game========================================================================================= , ID => " + matchup + ", Game Date => " + dataCollector.getGameDatesMap().get(matchup));
             consensusElements = webSiteReader.readCleanWebsite("https://contests.covers.com/consensus/matchupconsensusdetails?externalId=%2fsport%2ffootball%2fcompetition%3a" + matchup);
             dataCollector.collectConsensusData(consensusElements, matchup);
             dataCollector.collectThisWeekOdds(oddsElements, xRefMap, matchup);
-            excelBuilder.setThisWeekAwayTeamsMap(dataCollector.getThisWeekAwayTeamsMap());
-            excelBuilder.setHomeTeamsMap(dataCollector.getThisWeekHomeTeamsMap());
+            excelBuilder.setThisWeekAwayTeamsMap(dataCollector.getAwayFullNameMap());
+            excelBuilder.setHomeTeamsMap(dataCollector.getHomeFullNameMap());
             excelBuilder.setGameDatesMap(dataCollector.getGameDatesMap());
             excelBuilder.setAtsHomesMap(dataCollector.getAtsHomesMap());
             excelBuilder.setAtsAwaysMap(dataCollector.getAtsAwaysMap());

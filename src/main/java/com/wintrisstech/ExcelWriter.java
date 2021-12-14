@@ -8,7 +8,7 @@ import java.io.OutputStream;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 211212
+ * version 211213
  * write new NFL Covers data to the large SportData Excel sheet
  *******************************************************************/
 public class ExcelWriter
