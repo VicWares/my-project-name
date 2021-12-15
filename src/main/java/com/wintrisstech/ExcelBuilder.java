@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 211213
+ * version 211214
  *******************************************************************/
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -68,12 +68,14 @@ public class ExcelBuilder
         sportDataSheet.getRow(eventIndex).createCell(0);
         sportDataSheet.getRow(eventIndex).getCell(0).setCellStyle(leftStyle);
         sportDataSheet.getRow(eventIndex).getCell(0).setCellStyle(redStyle);
-        //sportDataSheet.getRow(0).getCell(0).setCellValue(time);
-        //System.out.println("ER72**************> " + time);
+        sportDataSheet.getRow(0).getCell(0).setCellValue(time);
         sportDataSheet.getRow(eventIndex).getCell(0).setCellValue(gameIdentifier);
         sportDataSheet.getRow(eventIndex).createCell(1);
         sportDataSheet.getRow(eventIndex).getCell(1).setCellStyle(centerStyle);
         sportDataSheet.getRow(eventIndex).getCell(1).setCellValue(thisMatchupDate);
+        sportDataSheet.getRow(eventIndex).createCell(32);//MoneyLine Bet365 away odds
+        sportDataSheet.getRow(eventIndex).getCell(32).setCellStyle(centerStyle);
+        sportDataSheet.getRow(eventIndex).getCell(32).setCellValue("9999");
         sportDataSheet.getRow(eventIndex).createCell(59);
         sportDataSheet.getRow(eventIndex).getCell(59).setCellStyle(myStyle);
         sportDataSheet.getRow(eventIndex).getCell(59).setCellValue(atsHome);

@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 211213
+ * version 211214
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
@@ -55,19 +55,19 @@ public class Main extends JComponent
         Elements nflElements = webSiteReader.readCleanWebsite("https://www.covers.com/sports/nfl/matchups");
         Elements weekElements = nflElements.select(".cmg_game_data, .cmg_matchup_game_box");
         xRefMap = buildXref(weekElements);
+        oddsElements = webSiteReader.readCleanWebsite("https://www.covers.com/sport/football/nfl/odds");//Info from log-in date through the present NFL week
+        dataCollector.collectThisWeekOdds(oddsElements, xRefMap);
         System.out.println("Main58, Initializing ............................................................................................... week number => " + weekNumber + ", week date => " + weekDate + ", " + weekElements.size() + " games this week") ;
         System.out.println(xRefMap);
         dataCollector.collectThisWeekMatchups(weekElements);
         sportDataWorkbook = excelReader.readSportData();
-        oddsElements = webSiteReader.readCleanWebsite("https://www.covers.com/sport/football/nfl/odds");//Info from log-in date through the present NFL week
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< MAIN LOOP.............................MAIN LOOP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> processing all mtchups this week
         for (Map.Entry<String, String> entry : xRefMap.entrySet())
         {
-            String matchup = entry.getKey();
-            System.out.println("Main68, working new game========================================================================================= , ID => " + matchup + ", Game Date => " + dataCollector.getGameDatesMap().get(matchup));
-            consensusElements = webSiteReader.readCleanWebsite("https://contests.covers.com/consensus/matchupconsensusdetails?externalId=%2fsport%2ffootball%2fcompetition%3a" + matchup);
-            dataCollector.collectConsensusData(consensusElements, matchup);
-            dataCollector.collectThisWeekOdds(oddsElements, xRefMap, matchup);
+            String dataEventId = entry.getKey();
+            System.out.println("Main67, working new game========================================================================================= , ID => " + dataEventId + " data-game => " + xRefMap.get(dataEventId) + ", Game Date => " + dataCollector.getGameDatesMap().get(dataEventId));
+            consensusElements = webSiteReader.readCleanWebsite("https://contests.covers.com/consensus/matchupconsensusdetails?externalId=%2fsport%2ffootball%2fcompetition%3a" + dataEventId);
+            dataCollector.collectConsensusData(consensusElements, dataEventId);
             excelBuilder.setThisWeekAwayTeamsMap(dataCollector.getAwayFullNameMap());
             excelBuilder.setHomeTeamsMap(dataCollector.getHomeFullNameMap());
             excelBuilder.setGameDatesMap(dataCollector.getGameDatesMap());
@@ -77,8 +77,8 @@ public class Main extends JComponent
             excelBuilder.setOuUndersMap(dataCollector.getOuUndersMap());
             excelBuilder.setCompleteHomeTeamName(dataCollector.getHomeTeamCompleteName());
             excelBuilder.setCompleteAwayTeamName(dataCollector.getAwayTeamCompleteName());
-            excelBuilder.setGameIdentifier(dataCollector.getGameIdentifierMap().get(matchup));
-            excelBuilder.buildExcel(sportDataWorkbook, matchup, globalMatchupIndex, dataCollector.getGameIdentifierMap().get(matchup));
+            excelBuilder.setGameIdentifier(dataCollector.getGameIdentifierMap().get(dataEventId));
+            excelBuilder.buildExcel(sportDataWorkbook, dataEventId, globalMatchupIndex, dataCollector.getGameIdentifierMap().get(dataEventId));
             globalMatchupIndex++;
         }
         excelWriter.openOutputStream();

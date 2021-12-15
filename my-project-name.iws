@@ -9,7 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="Version 211212&#10;Clean up...single main loop for odds and consednsus...but broke it!" />
+    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="Version 211213&#10;Built short name maps for home and away">
+      <change beforePath="$PROJECT_DIR$/my-project-name.iws" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/DataCollector.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/DataCollector.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -464,13 +471,6 @@
       <workItem from="1632534768500" duration="2357000" />
       <workItem from="1633195616838" duration="20000" />
     </task>
-    <task id="LOCAL-00011" summary="version 210319...Adding date info correctly...no executable jar">
-      <created>1616205584777</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1616205584777</updated>
-    </task>
     <task id="LOCAL-00012" summary="version 210320...CleanUp...no executable jar">
       <created>1616283625562</created>
       <option name="number" value="00012" />
@@ -807,7 +807,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639460153358</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Version 211213&#10;Built short name maps for home and away">
+      <created>1639460365329</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1639460365329</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -845,7 +852,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version 210523...getting all NFL season dates" />
     <MESSAGE value="version 210525...getting home and away team" />
     <MESSAGE value="version 210527...Reading/writing SportData.xlsx" />
     <MESSAGE value="version 210528...Reading ATS,OU,ID,Home,Away,Dates" />
@@ -870,7 +876,8 @@
     <MESSAGE value="Version 211208&#10;Finally have working odds for all matchups" />
     <MESSAGE value="Version 211211&#10;Syncing data-game with odds" />
     <MESSAGE value="Version 211212&#10;Clean up...single main loop for odds and consednsus...but broke it!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 211212&#10;Clean up...single main loop for odds and consednsus...but broke it!" />
+    <MESSAGE value="Version 211213&#10;Built short name maps for home and away" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 211213&#10;Built short name maps for home and away" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
