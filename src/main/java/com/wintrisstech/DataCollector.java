@@ -68,7 +68,8 @@ public class DataCollector
     private HashMap<String, String> ouOversMap = new HashMap<>();
     private HashMap<String, String> cityNameMap = new HashMap<>();
     private HashMap<String, String> idXref = new HashMap<>();
-    private static String[] bet365OddsArray = new String[6];
+    private String[] bet365OddsArray = new String[6];
+    public  HashMap<String, String> getAwayMLoddsMap(){return awayMLoddsMap;}
     public void collectThisWeekMatchups(Elements thisWeekElements)//From covers.com website for this week's matchups
     {
         for (Element e : thisWeekElements)//Build week matchup IDs array
@@ -135,9 +136,9 @@ public class DataCollector
         Elements money365 = oddsElements.select("liveOddsCell[data-type*=moneyline], [data-book*=bet365]");//get only moneyline and bet365 and away odds
         for(Map.Entry<String, String> s : xRefMap.entrySet() )
         {
-            awayMLoddsMap.put(s.getKey(), money365.select("div.__american").select("span").get(i++).text());
+            getAwayMLoddsMap().put(s.getKey(), money365.select("div.__american").select("span").get(i++).text());
         }
-        System.out.println(awayMLoddsMap);
+        System.out.println(getAwayMLoddsMap());
         //System.out.println("***DC138 ML away team: <" + awayShortNameMap.get(dataEventId) + "> awayOdds: < " + getMLawayOdds() + " > home team: <" + homeShortNameMap.get(dataEventId) + "> homeOdds: < " + getMLhomeOdds() + " > data-event-id: <" + dataEventId + ">" + "Data-Game: <" + xRefMap.get(dataEventId) + ">");
     }
     public HashMap<String, String> getHomeFullNameMap()
@@ -187,13 +188,5 @@ public class DataCollector
     public void setCityNameMap(HashMap<String, String> cityNameMap)
     {
         this.cityNameMap = cityNameMap;
-    }
-    public String getMLhomeOdds()
-    {
-        return this.MLhomeOdds;
-    }
-    public String getMLawayOdds()
-    {
-        return this.MLawayOdds;
     }
 }
