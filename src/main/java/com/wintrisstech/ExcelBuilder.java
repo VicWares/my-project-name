@@ -33,6 +33,8 @@ public class ExcelBuilder
     private HashMap<String, String> atsAwaysMap = new HashMap<>();
     private HashMap<String, String> ouOversMap;
     private HashMap<String, String> ouUndersMap;
+    private HashMap<String, String> homeMLOddsMap = new HashMap<>();
+    private HashMap<String, String> awayMLOddsMap = new HashMap<>();
     private Sheet sportDataSheet;
     private XSSFWorkbook sportDataWorkBook = new XSSFWorkbook();
     private XSSFSheet sportDataUpdateSheet = null;
@@ -73,9 +75,9 @@ public class ExcelBuilder
         sportDataSheet.getRow(eventIndex).createCell(1);
         sportDataSheet.getRow(eventIndex).getCell(1).setCellStyle(centerStyle);
         sportDataSheet.getRow(eventIndex).getCell(1).setCellValue(thisMatchupDate);
-        sportDataSheet.getRow(eventIndex).createCell(32);//MoneyLine Bet365 away odds
-        sportDataSheet.getRow(eventIndex).getCell(32).setCellStyle(centerStyle);
-        sportDataSheet.getRow(eventIndex).getCell(32).setCellValue("9999");
+        sportDataSheet.getRow(eventIndex).createCell(31);//MoneyLine Bet365 away odds, column AF
+        sportDataSheet.getRow(eventIndex).getCell(31).setCellStyle(centerStyle);
+        sportDataSheet.getRow(eventIndex).getCell(31).setCellValue(awayMLOddsMap.get(dataEventID));
         sportDataSheet.getRow(eventIndex).createCell(59);
         sportDataSheet.getRow(eventIndex).getCell(59).setCellStyle(myStyle);
         sportDataSheet.getRow(eventIndex).getCell(59).setCellValue(atsHome);
@@ -88,6 +90,7 @@ public class ExcelBuilder
         sportDataSheet.getRow(eventIndex).createCell(66);
         sportDataSheet.getRow(eventIndex).getCell(66).setCellStyle(myStyle);
         sportDataSheet.getRow(eventIndex).getCell(66).setCellValue(ouUnder);
+        System.out.println("EB93 " + awayMLOddsMap);
         return sportDataWorkbook;
     }
     public void setHomeTeamsMap(HashMap<String, String> homeTeamsMap){this.homeTeamsMap = homeTeamsMap;}
@@ -112,4 +115,12 @@ public class ExcelBuilder
     public void setCompleteHomeTeamName(String completeHomeTeamName){this.completeHomeTeamName = completeHomeTeamName;}
     public void setCompleteAwayTeamName(String completeAwayTeamName){this.completeAwayTeamName = completeAwayTeamName;}
     public void setGameIdentifier(String gameIdentifier){this.gameIdentifier = gameIdentifier;}
+    public void setHomeMLOddsMap(HashMap<String, String> homeMLOddsMap)
+    {
+        this.homeMLOddsMap = homeMLOddsMap;
+    }
+    public void setAwayMLOddsMap(HashMap<String, String> awayMLOddsMap)
+    {
+        this.awayMLOddsMap = awayMLOddsMap;
+    }
 }

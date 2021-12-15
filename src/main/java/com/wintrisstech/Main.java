@@ -78,6 +78,7 @@ public class Main extends JComponent
             excelBuilder.setCompleteHomeTeamName(dataCollector.getHomeTeamCompleteName());
             excelBuilder.setCompleteAwayTeamName(dataCollector.getAwayTeamCompleteName());
             excelBuilder.setGameIdentifier(dataCollector.getGameIdentifierMap().get(dataEventId));
+            excelBuilder.setAwayMLOddsMap(dataCollector.getAwayMLoddsMap());
             excelBuilder.buildExcel(sportDataWorkbook, dataEventId, globalMatchupIndex, dataCollector.getGameIdentifierMap().get(dataEventId));
             globalMatchupIndex++;
         }
