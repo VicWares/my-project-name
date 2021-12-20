@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 2112019
+ * version 2112020
  * Builds data event id array and calendar date array
  *******************************************************************/
 import org.jsoup.nodes.Element;
@@ -15,7 +15,6 @@ public class DataCollector
     private static HashMap<String, String> bet365HomeTeamOdds = new HashMap<>();
     private static HashMap<String, String> bet365AwayTeamOdds = new HashMap<>();
     private static HashMap<String, String> bet365Odds = new HashMap<>();
-    private static ArrayList<String> oddsArray = new ArrayList<>();
     private static ArrayList<String> thisWeekMatchuplist = new ArrayList<>();
     private static ArrayList<String> homeAmericanOddsArray = new ArrayList<>();
     private static HashMap<String, String> homeAmericanOddsMap = new HashMap<>();
@@ -32,7 +31,7 @@ public class DataCollector
     private static HashMap<String, String> awayFractionalOddsMap = new HashMap<>();
     private HashMap<String, String> mlHomeOdds = new HashMap<String, String>();
     private HashMap<String, String> mlAwayOdds = new HashMap<String, String>();
-    private String thisMatchup;
+    private String dataEventId;
     private String MLhomeOdds;
     private String MLawayOdds;
     private String homeTeamNickname;//e.g. Browns...data-home-team-nickname-search
@@ -69,10 +68,9 @@ public class DataCollector
     private HashMap<String, String> cityNameMap = new HashMap<>();
     private HashMap<String, String> idXref = new HashMap<>();
     private String[] bet365OddsArray = new String[6];
-    private String[] oddsSplitArray = new String[20];//TODO No absolute numbers
     public HashMap<String, String> getAwayMLoddsMap() {return awayMLoddsMap;}
     public HashMap<String, String> getHomeMLoddsMap() {return awayMLoddsMap;}
-    public void collectThisWeekMatchups(Elements thisWeekElements)//From covers.com website for this week's matchups
+    public void collectTeamInfo(Elements thisWeekElements)//From covers.com website for this week's matchups
     {
         for (Element e : thisWeekElements)//Build week matchup IDs array
         {
@@ -87,30 +85,30 @@ public class DataCollector
             awayTeamCity = cityNameMap.get(awayTeamCity);
             awayTeamCompleteName = awayTeamCity + " " + awayTeamNickname;
             gameIdentifier = thisSeason + " - " + awayTeamCompleteName + " @ " + homeTeamCompleteName;
-            thisMatchup = e.attr("data-event-id");
+            dataEventId = e.attr("data-event-id");
             String[] gameDateTime = e.attr("data-game-date").split(" ");
             gameDate = gameDateTime[0];
             awayTeamScore = e.attr("data-away-score");
             thisWeek = e.attr("data-competition-type");
             thisWeekGameDates.add(gameDate);
-            gameDatesMap.put(thisMatchup, gameDate);
-            gameIdentifierMap.put(thisMatchup, gameIdentifier);
+            gameDatesMap.put(dataEventId, gameDate);
+            gameIdentifierMap.put(dataEventId, gameIdentifier);
             thisWeekHomeTeams.add(homeTeamCompleteName);
             thisWeekAwayTeams.add(awayTeamCompleteName);
-            homeFullNameMap.put(thisMatchup, homeTeamFullName);
-            awayFullNameMap.put(thisMatchup, awayTeamFullName);
+            homeFullNameMap.put(dataEventId, homeTeamFullName);
+            awayFullNameMap.put(dataEventId, awayTeamFullName);
             thisWeekHomeTeamScores.add(homeTeamScore);
             thisWeekAwayTeamScores.add((awayTeamScore));
             thisGameWeekNumbers.add(thisWeek);
             String awayShortName = e.attr("data-away-team-shortname-search");//Away team
-            awayShortNameMap.put(thisMatchup, awayShortName);
+            awayShortNameMap.put(dataEventId, awayShortName);
             String homeShortName = e.attr("data-home-team-shortname-search");//Home team
-            homeShortNameMap.put(thisMatchup, homeShortName);
+            homeShortNameMap.put(dataEventId, homeShortName);
         }
     }
     public void collectConsensusData(Elements thisMatchupConsensus, String thisMatchupID)
     {
-        this.thisMatchup = thisMatchupID;
+        this.dataEventId = thisMatchupID;
         String ouOver = null;
         String ouUnder = null;
         String atsHome = null;
@@ -133,29 +131,18 @@ public class DataCollector
         atsHomesMap.put(thisMatchupID, atsAway);
         atsAwaysMap.put(thisMatchupID, atsHome);
     }
-    public String[] collectThisWeekOdds(Elements oddsElements, HashMap<String, String> xRefMap, String dataEventId)
+    public String collectMoneylineOdds(Elements oddsElements, HashMap<String, String> xRefMap, String dataEventId)
     {
         String dataGame = xRefMap.get(dataEventId);
         System.out.println("data-event => " + dataEventId + " data-game => " + dataGame);
-        Element table = oddsElements.select("table").get(1);//MoneyLine table
-        Elements rows = table.select("tr");
-        for (Element row : rows)
-        {
-            Elements bet365Column = row.select("td:eq(8)");//bet365 column
-            String awayOdds = bet365Column.select(".__awayOdds .__american span").text();
-            String homeOdds = bet365Column.select(".__homeOdds .__american span").text();
-            System.out.println(awayOdds + " " + homeOdds);
-        }
-        return oddsSplitArray;
+        Element table = oddsElements.select("table").get(1);
+        Elements rows = table.select("tr [data-game=" + dataGame + "]");
+        Elements bet365Column = rows.select("td:eq(8)");//bet365 column
+        String awayOdds = bet365Column.select(".__awayOdds .__american span").text();
+        String homeOdds = bet365Column.select(".__homeOdds .__american span").text();
+        String moneylineOddsString = awayOdds + " " + homeOdds;
+        return moneylineOddsString;//awayOdds space homeOdds
     }
-    //        for (Element row : rows)
-//        {
-//            Elements cols = row.select("td");
-//            System.out.println("cols.size => " + cols.size());
-//            System.out.println("rows.size => " + rows.size());
-//        }
-//        System.out.println("777 " + money365.select("div.__awayOdds").select("span").text());
-//        System.out.println("888 " + money365.select("div.__homeOdds").select("span").text());
     public HashMap<String, String> getHomeFullNameMap()
     {
         return homeFullNameMap;

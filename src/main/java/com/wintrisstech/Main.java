@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 211219
+ * version 211220
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 public class Main extends JComponent
 {
-    private static String version = "211219";
+    private static String version = "211220";
     private XSSFWorkbook sportDataWorkbook;
     private HashMap<String, String> weekNumberMap = new HashMap<>();
     private HashMap<String, String> cityNameMap = new HashMap<>();
@@ -55,14 +55,15 @@ public class Main extends JComponent
         oddsElements = webSiteReader.readCleanWebsite("https://www.covers.com/sport/football/nfl/odds");//Info from log-in date through the present NFL week
         System.out.println("Main58, Initializing ............................................................................................... week number => " + weekNumber + ", week date => " + weekDate + ", " + weekElements.size() + " games this week") ;
         System.out.println(xRefMap);
-        dataCollector.collectThisWeekMatchups(weekElements);
+        dataCollector.collectTeamInfo(weekElements);
         sportDataWorkbook = excelReader.readSportData();
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< MAIN LOOP.............................MAIN LOOP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> processing all mtchups this week
         for (Map.Entry<String, String> entry : xRefMap.entrySet())
         {
             String dataEventId = entry.getKey();
-            dataCollector.collectThisWeekOdds(oddsElements, xRefMap, dataEventId);
             System.out.println("Main67, working new game========================================================================================= , ID => " + dataEventId + " data-game => " + xRefMap.get(dataEventId) + ", Game Date => " + dataCollector.getGameDatesMap().get(dataEventId));
+            String moneyLineOdds = dataCollector.collectMoneylineOdds(oddsElements, xRefMap, dataEventId);
+            excelBuilder.setMoneyLineOdds(moneyLineOdds, dataEventId);
             consensusElements = webSiteReader.readCleanWebsite("https://contests.covers.com/consensus/matchupconsensusdetails?externalId=%2fsport%2ffootball%2fcompetition%3a" + dataEventId);
             dataCollector.collectConsensusData(consensusElements, dataEventId);
             excelBuilder.setThisWeekAwayTeamsMap(dataCollector.getAwayFullNameMap());
@@ -75,7 +76,6 @@ public class Main extends JComponent
             excelBuilder.setCompleteHomeTeamName(dataCollector.getHomeTeamCompleteName());
             excelBuilder.setCompleteAwayTeamName(dataCollector.getAwayTeamCompleteName());
             excelBuilder.setGameIdentifier(dataCollector.getGameIdentifierMap().get(dataEventId));
-            excelBuilder.setAwayMLOddsMap(dataCollector.getAwayMLoddsMap());
             excelBuilder.buildExcel(sportDataWorkbook, dataEventId, globalMatchupIndex, dataCollector.getGameIdentifierMap().get(dataEventId));
             globalMatchupIndex++;
         }
