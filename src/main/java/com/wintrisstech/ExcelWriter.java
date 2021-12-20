@@ -1,16 +1,15 @@
 package com.wintrisstech;
+/*******************************************************************
+ * Covers NFL Extraction Tool
+ * Copyright 2020 Dan Farris
+ * version 211219
+ * write new NFL Covers data to the large SportData Excel sheet
+ *******************************************************************/
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-/*******************************************************************
- * Covers NFL Extraction Tool
- * Copyright 2020 Dan Farris
- * version 211214
- * write new NFL Covers data to the large SportData Excel sheet
- *******************************************************************/
 public class ExcelWriter
 {
     private String deskTopPath = System.getProperty("user.home") + "/Desktop";/* User's desktop path */

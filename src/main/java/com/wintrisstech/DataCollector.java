@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 2112014
+ * version 2112019
  * Builds data event id array and calendar date array
  *******************************************************************/
 import org.jsoup.nodes.Element;
@@ -10,7 +10,6 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 public class DataCollector
 {
     private static HashMap<String, String> bet365HomeTeamOdds = new HashMap<>();
@@ -28,6 +27,7 @@ public class DataCollector
     private static HashMap<String, String> awayAmericanOddsMap = new HashMap<>();
     private static ArrayList<String> awayDecimalOddsArray = new ArrayList<>();
     private static HashMap<String, String> awayMLoddsMap = new HashMap<>();
+    private static HashMap<String, String> homeMLoddsMap = new HashMap<>();
     private static ArrayList<String> awayFractionalOddsArray = new ArrayList<>();
     private static HashMap<String, String> awayFractionalOddsMap = new HashMap<>();
     private HashMap<String, String> mlHomeOdds = new HashMap<String, String>();
@@ -37,8 +37,8 @@ public class DataCollector
     private String MLawayOdds;
     private String homeTeamNickname;//e.g. Browns...data-home-team-nickname-search
     private String awayTeamNickname;//e.g Texans...data-away-team-nickname-search
-    private  String awayTeamFullName;//e.g. Cleveland...data-home-team-fullname-search
-    private  String homeTeamFullName;//e.g Houston...data-home-team-fullname-search
+    private String awayTeamFullName;//e.g. Cleveland...data-home-team-fullname-search
+    private String homeTeamFullName;//e.g Houston...data-home-team-fullname-search
     private String awayTeamCompleteName;//e.g. Kansas City Chiefs
     private static String homeTeamCompleteName;//e.g Houston Texans
     private String gameIdentifier;//e.g 2020 - Houston Texans @ Kansas City Chiefs
@@ -69,7 +69,9 @@ public class DataCollector
     private HashMap<String, String> cityNameMap = new HashMap<>();
     private HashMap<String, String> idXref = new HashMap<>();
     private String[] bet365OddsArray = new String[6];
-    public  HashMap<String, String> getAwayMLoddsMap(){return awayMLoddsMap;}
+    private String[] oddsSplitArray = new String[20];//TODO No absolute numbers
+    public HashMap<String, String> getAwayMLoddsMap() {return awayMLoddsMap;}
+    public HashMap<String, String> getHomeMLoddsMap() {return awayMLoddsMap;}
     public void collectThisWeekMatchups(Elements thisWeekElements)//From covers.com website for this week's matchups
     {
         for (Element e : thisWeekElements)//Build week matchup IDs array
@@ -122,7 +124,8 @@ public class DataCollector
             atsHome = leftConsensus.select("div").get(0).text();
             atsAway = rightConsensus.select("div").get(0).text();
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             System.out.println("DC121 DataCollector, no consensus data for " + gameIdentifier);
         }
         ouOversMap.put(thisMatchupID, ouOver);
@@ -130,17 +133,29 @@ public class DataCollector
         atsHomesMap.put(thisMatchupID, atsAway);
         atsAwaysMap.put(thisMatchupID, atsHome);
     }
-    public void collectThisWeekOdds(Elements oddsElements, HashMap<String, String> xRefMap)
+    public String[] collectThisWeekOdds(Elements oddsElements, HashMap<String, String> xRefMap, String dataEventId)
     {
-        int i = 0;
-        Elements money365 = oddsElements.select("liveOddsCell[data-type*=moneyline], [data-book*=bet365]");//get only moneyline and bet365 and away odds
-        for(Map.Entry<String, String> s : xRefMap.entrySet() )
+        String dataGame = xRefMap.get(dataEventId);
+        System.out.println("data-event => " + dataEventId + " data-game => " + dataGame);
+        Element table = oddsElements.select("table").get(1);//MoneyLine table
+        Elements rows = table.select("tr");
+        for (Element row : rows)
         {
-            getAwayMLoddsMap().put(s.getKey(), money365.select("div.__american").select("span").get(i++).text());
+            Elements bet365Column = row.select("td:eq(8)");//bet365 column
+            String awayOdds = bet365Column.select(".__awayOdds .__american span").text();
+            String homeOdds = bet365Column.select(".__homeOdds .__american span").text();
+            System.out.println(awayOdds + " " + homeOdds);
         }
-        System.out.println(getAwayMLoddsMap());
-        //System.out.println("***DC138 ML away team: <" + awayShortNameMap.get(dataEventId) + "> awayOdds: < " + getMLawayOdds() + " > home team: <" + homeShortNameMap.get(dataEventId) + "> homeOdds: < " + getMLhomeOdds() + " > data-event-id: <" + dataEventId + ">" + "Data-Game: <" + xRefMap.get(dataEventId) + ">");
+        return oddsSplitArray;
     }
+    //        for (Element row : rows)
+//        {
+//            Elements cols = row.select("td");
+//            System.out.println("cols.size => " + cols.size());
+//            System.out.println("rows.size => " + rows.size());
+//        }
+//        System.out.println("777 " + money365.select("div.__awayOdds").select("span").text());
+//        System.out.println("888 " + money365.select("div.__homeOdds").select("span").text());
     public HashMap<String, String> getHomeFullNameMap()
     {
         return homeFullNameMap;
@@ -190,3 +205,4 @@ public class DataCollector
         this.cityNameMap = cityNameMap;
     }
 }
+
