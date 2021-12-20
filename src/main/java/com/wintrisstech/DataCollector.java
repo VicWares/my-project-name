@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 2112020
+ * version 2112020A
  * Builds data event id array and calendar date array
  *******************************************************************/
 import org.jsoup.nodes.Element;
@@ -47,7 +47,7 @@ public class DataCollector
     private String awayTeamCity;
     private String homeTeamCity;
     private String thisWeek;
-    private String thisSeason;
+    private String thisSeason = "2021";
     private ArrayList<String> thisWeekGameDates = new ArrayList<String>();
     private ArrayList<String> thisGameWeekNumbers = new ArrayList<String>();
     private ArrayList<String> thisWeekHomeTeamScores = new ArrayList<String>();
@@ -171,10 +171,7 @@ public class DataCollector
     {
         return ouUndersMap;
     }
-    public HashMap<String, String> getGameIdentifierMap()
-    {
-        return gameIdentifierMap;
-    }
+    public HashMap<String, String> getGameIdentifierMap(){return gameIdentifierMap;}
     public void setThisSeason(String thisSeason)
     {
         this.thisSeason = thisSeason;

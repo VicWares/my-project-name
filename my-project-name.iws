@@ -9,7 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="Version 211220 Putting away odds in 'excel'" />
+    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="Version 211220 Putting away odds in 'excel'">
+      <change beforePath="$PROJECT_DIR$/my-project-name.iws" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/DataCollector.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/DataCollector.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/ExcelBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/ExcelBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -464,13 +471,6 @@
       <workItem from="1632534768500" duration="2357000" />
       <workItem from="1633195616838" duration="20000" />
     </task>
-    <task id="LOCAL-00017" summary="version 210409&#10;Succsessfully building both NFL Week Array/Data Event ID Arrays">
-      <created>1618024438897</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1618024438897</updated>
-    </task>
     <task id="LOCAL-00018" summary="version 210409&#10;Succsessfully building both NFL Week Array/Data Event ID Array...">
       <created>1618028148193</created>
       <option name="number" value="00018" />
@@ -807,7 +807,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640026621427</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="Version 211220 Putting away odds in 'excel'">
+      <created>1640027181860</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1640027181865</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 211220
+ * version 211220A
  *******************************************************************/
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -81,6 +81,9 @@ public class ExcelBuilder
         sportDataSheet.getRow(eventIndex).createCell(31);//MoneyLine Bet365 away odds, column AF
         sportDataSheet.getRow(eventIndex).getCell(31).setCellStyle(centerStyle);
         sportDataSheet.getRow(eventIndex).getCell(31).setCellValue(awayMoneyLineOddsMap.get(dataEventID));
+        sportDataSheet.getRow(eventIndex).createCell(17);//MoneyLine Bet365 home odds, column R
+        sportDataSheet.getRow(eventIndex).getCell(17).setCellStyle(centerStyle);
+        sportDataSheet.getRow(eventIndex).getCell(17).setCellValue(homeMoneyLineOddsMap.get(dataEventID));
         sportDataSheet.getRow(eventIndex).createCell(59);
         sportDataSheet.getRow(eventIndex).getCell(59).setCellStyle(myStyle);
         sportDataSheet.getRow(eventIndex).getCell(59).setCellValue(atsHome);
@@ -111,9 +114,6 @@ public class ExcelBuilder
     {
         this.ouUndersMap = ouUndersMap;
     }
-    {
-        this.thisSeason = thisSeason;
-    }
     public void setCompleteHomeTeamName(String completeHomeTeamName){this.completeHomeTeamName = completeHomeTeamName;}
     public void setCompleteAwayTeamName(String completeAwayTeamName){this.completeAwayTeamName = completeAwayTeamName;}
     public void setGameIdentifier(String gameIdentifier){this.gameIdentifier = gameIdentifier;}
@@ -130,7 +130,8 @@ public class ExcelBuilder
           awayMoneyLineOddsMap.put(dataEventId, awayMoneyLineOdds);
           homeMoneyLineOdds = moneyLineOddsArray[1];
           homeMoneyLineOddsMap.put(dataEventId, homeMoneyLineOdds);
-          System.out.println("EB135 MLawayOdds Map =>  " + awayMoneyLineOddsMap);
+          System.out.println("EB136 MLawayOdds Map => " + awayMoneyLineOddsMap);
+          System.out.println("EB137 MLhomeOdds Map => " + homeMoneyLineOddsMap);
       }
     }
 }
