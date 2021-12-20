@@ -90,6 +90,7 @@ public class ExcelBuilder
         sportDataSheet.getRow(eventIndex).createCell(66);
         sportDataSheet.getRow(eventIndex).getCell(66).setCellStyle(myStyle);
         sportDataSheet.getRow(eventIndex).getCell(66).setCellValue(ouUnder);
+        System.out.println("EB93 " + awayMLOddsMap);
         return sportDataWorkbook;
     }
     public void setHomeTeamsMap(HashMap<String, String> homeTeamsMap){this.homeTeamsMap = homeTeamsMap;}
