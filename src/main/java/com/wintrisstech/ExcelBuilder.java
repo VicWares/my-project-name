@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 211220A
+ * version 211221
  *******************************************************************/
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -130,8 +130,6 @@ public class ExcelBuilder
           awayMoneyLineOddsMap.put(dataEventId, awayMoneyLineOdds);
           homeMoneyLineOdds = moneyLineOddsArray[1];
           homeMoneyLineOddsMap.put(dataEventId, homeMoneyLineOdds);
-          System.out.println("EB136 MLawayOdds Map => " + awayMoneyLineOddsMap);
-          System.out.println("EB137 MLhomeOdds Map => " + homeMoneyLineOddsMap);
       }
     }
 }

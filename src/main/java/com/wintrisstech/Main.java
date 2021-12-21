@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 211220
+ * version 211221
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 public class Main extends JComponent
 {
-    private static String version = "211220";
+    private static String version = "211221";
     private XSSFWorkbook sportDataWorkbook;
     private HashMap<String, String> weekNumberMap = new HashMap<>();
     private HashMap<String, String> cityNameMap = new HashMap<>();
@@ -27,13 +27,13 @@ public class Main extends JComponent
     public ExcelBuilder excelBuilder = new ExcelBuilder();
     public ExcelWriter excelWriter = new ExcelWriter();
     public DataCollector dataCollector = new DataCollector();
-    private Elements weekElements;
-    private Elements seasonMatchupElements;
+//    private Elements weekElements;
+//    private Elements seasonMatchupElements;
     private Elements consensusElements;
     private int globalMatchupIndex = 3;
     private Elements oddsElements;
-    private String MLhomeOdds;
-    private String MLawayOdds;
+//    private String MLhomeOdds;
+//    private String MLawayOdds;
 
     public static void main(String[] args) throws IOException, ParseException
     {
@@ -47,21 +47,21 @@ public class Main extends JComponent
         fillWeekNumberMap();
         dataCollector.setCityNameMap(cityNameMap);
         String weekNumber = JOptionPane.showInputDialog("Enter NFL week number");
-        weekNumber = "15";
+        weekNumber = "16";
         String weekDate = weekNumberMap.get(weekNumber);
-        Elements nflElements = webSiteReader.readCleanWebsite("https://www.covers.com/sports/nfl/matchups");
+        Elements nflElements = webSiteReader.readCleanWebsite("https://www.covers.com/sports/nfl/matchups?selectedDate=" + weekDate);
         Elements weekElements = nflElements.select(".cmg_game_data, .cmg_matchup_game_box");
         xRefMap = buildXref(weekElements);
         oddsElements = webSiteReader.readCleanWebsite("https://www.covers.com/sport/football/nfl/odds");//Info from log-in date through the present NFL week
-        System.out.println("Main58, Initializing ............................................................................................... week number => " + weekNumber + ", week date => " + weekDate + ", " + weekElements.size() + " games this week") ;
+        System.out.println("Main56 week number => " + weekNumber + ", week date => " + weekDate + ", " + weekElements.size() + " games this week") ;
         System.out.println(xRefMap);
         dataCollector.collectTeamInfo(weekElements);
         sportDataWorkbook = excelReader.readSportData();
-        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< MAIN LOOP.............................MAIN LOOP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> processing all mtchups this week
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< MAIN LOOP===================MAIN LOOP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> processing all mtchups this week
         for (Map.Entry<String, String> entry : xRefMap.entrySet())
         {
             String dataEventId = entry.getKey();
-            System.out.println("Main67, working new game========================================================================================= , ID => " + dataEventId + " data-game => " + xRefMap.get(dataEventId) + ", Game Date => " + dataCollector.getGameDatesMap().get(dataEventId));
+            System.out.println("Main64 " + dataEventId + " " + xRefMap.get(dataEventId) + " " + dataCollector.getGameDatesMap().get(dataEventId) + " " + dataCollector.getAwayFullNameMap().get(dataEventId) + " vs " + dataCollector.getHomeFullNameMap().get(dataEventId));
             String moneyLineOdds = dataCollector.collectMoneylineOdds(oddsElements, xRefMap, dataEventId);
             excelBuilder.setMoneyLineOdds(moneyLineOdds, dataEventId);
             consensusElements = webSiteReader.readCleanWebsite("https://contests.covers.com/consensus/matchupconsensusdetails?externalId=%2fsport%2ffootball%2fcompetition%3a" + dataEventId);
