@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 211221
+ * version 211223
  *******************************************************************/
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -46,8 +46,12 @@ public class ExcelBuilder
     private String gameIdentifier;
     private String awayMoneyLineOdds;
     private String homeMoneyLineOdds;
+    private String awaySpreadOdds;
+    private String homeSpreadOdds;
     private HashMap<String, String> homeMoneyLineOddsMap = new HashMap<>();
     private HashMap<String, String> awayMoneyLineOddsMap = new HashMap<>();
+    private HashMap<String, String> homeSpreadOddsMap = new HashMap<>();
+    private HashMap<String, String> awaySpreadOddsMap = new HashMap<>();
     public XSSFWorkbook buildExcel(XSSFWorkbook sportDataWorkbook, String dataEventID, int eventIndex, String gameIdentifier)
     {
         sportDataSheet = sportDataWorkbook.getSheet("Data");
@@ -70,29 +74,44 @@ public class ExcelBuilder
         atsAway = atsAwaysMap.get(dataEventID);
         ouOver = ouOversMap.get(dataEventID);
         ouUnder = ouUndersMap.get(dataEventID);
+
         sportDataSheet.getRow(eventIndex).createCell(0);
         sportDataSheet.getRow(eventIndex).getCell(0).setCellStyle(leftStyle);
-        sportDataSheet.getRow(eventIndex).getCell(0).setCellStyle(redStyle);
         sportDataSheet.getRow(0).getCell(0).setCellValue(time);
-        sportDataSheet.getRow(eventIndex).getCell(0).setCellValue(gameIdentifier);
+        sportDataSheet.getRow(eventIndex).getCell(0).setCellValue(gameIdentifier);//e.g. 2021 - Washington Football Team @ Dallas Cowboys
+
         sportDataSheet.getRow(eventIndex).createCell(1);
         sportDataSheet.getRow(eventIndex).getCell(1).setCellStyle(centerStyle);
         sportDataSheet.getRow(eventIndex).getCell(1).setCellValue(thisMatchupDate);
-        sportDataSheet.getRow(eventIndex).createCell(31);//MoneyLine Bet365 away odds, column AF
-        sportDataSheet.getRow(eventIndex).getCell(31).setCellStyle(centerStyle);
-        sportDataSheet.getRow(eventIndex).getCell(31).setCellValue(awayMoneyLineOddsMap.get(dataEventID));
+
+        sportDataSheet.getRow(eventIndex).createCell(12);//Spread home odds, column M
+        sportDataSheet.getRow(eventIndex).getCell(12).setCellStyle(centerStyle);
+        sportDataSheet.getRow(eventIndex).getCell(12).setCellValue(homeSpreadOddsMap.get(dataEventID));
+
         sportDataSheet.getRow(eventIndex).createCell(17);//MoneyLine Bet365 home odds, column R
         sportDataSheet.getRow(eventIndex).getCell(17).setCellStyle(centerStyle);
         sportDataSheet.getRow(eventIndex).getCell(17).setCellValue(homeMoneyLineOddsMap.get(dataEventID));
+
+        sportDataSheet.getRow(eventIndex).createCell(26);//Spread away odds, column AA
+        sportDataSheet.getRow(eventIndex).getCell(26).setCellStyle(centerStyle);
+        sportDataSheet.getRow(eventIndex).getCell(26).setCellValue(awaySpreadOddsMap.get(dataEventID));
+
+        sportDataSheet.getRow(eventIndex).createCell(31);//MoneyLine Bet365 away odds, column AF
+        sportDataSheet.getRow(eventIndex).getCell(31).setCellStyle(centerStyle);
+        sportDataSheet.getRow(eventIndex).getCell(31).setCellValue(awayMoneyLineOddsMap.get(dataEventID));
+
         sportDataSheet.getRow(eventIndex).createCell(59);
         sportDataSheet.getRow(eventIndex).getCell(59).setCellStyle(myStyle);
         sportDataSheet.getRow(eventIndex).getCell(59).setCellValue(atsHome);
+
         sportDataSheet.getRow(eventIndex).createCell(61);
         sportDataSheet.getRow(eventIndex).getCell(61).setCellStyle(myStyle);
         sportDataSheet.getRow(eventIndex).getCell(61).setCellValue(atsAway);
+
         sportDataSheet.getRow(eventIndex).createCell(64);
         sportDataSheet.getRow(eventIndex).getCell(64).setCellStyle(myStyle);
         sportDataSheet.getRow(eventIndex).getCell(64).setCellValue(ouOver);
+
         sportDataSheet.getRow(eventIndex).createCell(66);
         sportDataSheet.getRow(eventIndex).getCell(66).setCellStyle(myStyle);
         sportDataSheet.getRow(eventIndex).getCell(66).setCellValue(ouUnder);
@@ -131,5 +150,16 @@ public class ExcelBuilder
           homeMoneyLineOdds = moneyLineOddsArray[1];
           homeMoneyLineOddsMap.put(dataEventId, homeMoneyLineOdds);
       }
+    }
+    public void setSpreadOdds(String spreadOdds, String dataEventId)
+    {
+        String[] spreadOddsArray = spreadOdds.split(" ");
+        if (spreadOddsArray.length > 0)
+        {
+            awaySpreadOdds = spreadOddsArray[0];
+            awaySpreadOddsMap.put(dataEventId, awayMoneyLineOdds);
+            homeSpreadOdds = spreadOddsArray[1];
+            homeSpreadOddsMap.put(dataEventId, homeMoneyLineOdds);
+        }
     }
 }

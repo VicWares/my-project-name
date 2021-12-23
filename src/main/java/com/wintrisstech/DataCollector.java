@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 2112021
+ * version 2112023
  * Builds data event id array and calendar date array
  *******************************************************************/
 import org.jsoup.nodes.Element;
@@ -135,7 +135,17 @@ public class DataCollector
     {
         String dataGame = xRefMap.get(dataEventId);//e.g. data-event-id...83480 => data-game...244451
         Element table = oddsElements.select("table").get(1);
-        System.out.println("bbb" + oddsElements.select("data-type"));
+        Elements rows = table.select("tr [data-game=" + dataGame + "]");
+        Elements bet365Column = rows.select("td:eq(8)");//bet365 column
+        Elements moneyline = bet365Column.select("[data-type=moneyline]");
+        String awayOdds = moneyline.select(".__awayOdds .__american span").text();
+        String homeOdds = moneyline.select(".__homeOdds .__american span").text();
+        String moneylineOddsString = awayOdds + " " + homeOdds;
+        return moneylineOddsString;//awayOdds space homeOdds
+    } public String collectSpreadOdds(Elements oddsElements, HashMap<String, String> xRefMap, String dataEventId)
+    {
+        String dataGame = xRefMap.get(dataEventId);//e.g. data-event-id...83480 => data-game...244451
+        Element table = oddsElements.select("table").get(1);
         Elements rows = table.select("tr [data-game=" + dataGame + "]");
         Elements bet365Column = rows.select("td:eq(8)");//bet365 column
         Elements moneyline = bet365Column.select("[data-type=moneyline]");

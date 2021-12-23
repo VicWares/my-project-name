@@ -5,7 +5,7 @@
       <output-path>$PROJECT_DIR$/out/artifacts/Covers</output-path>
       <root id="root">
         <element id="archive" name="Covers.jar">
-          <element id="module-output" name="Covers" />
+          <element id="module-output" name="DanCovers" />
         </element>
       </root>
     </artifact>
@@ -19,11 +19,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Covers" />
+        <module name="DanCovers" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Covers" target="11" />
+      <module name="DanCovers" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="Encoding">
@@ -39,7 +39,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Covers" options="" />
+      <module name="DanCovers" options="" />
     </option>
   </component>
   <component name="MavenProjectsManager">
@@ -180,7 +180,7 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Covers.iml" filepath="$PROJECT_DIR$/Covers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DanCovers.iml" filepath="$PROJECT_DIR$/DanCovers.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11.0.5" project-jdk-type="JavaSDK">

@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 211221
+ * version 211223
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
@@ -64,6 +64,8 @@ public class Main extends JComponent
             System.out.println("Main64 " + dataEventId + " " + xRefMap.get(dataEventId) + " " + dataCollector.getGameDatesMap().get(dataEventId) + " " + dataCollector.getAwayFullNameMap().get(dataEventId) + " vs " + dataCollector.getHomeFullNameMap().get(dataEventId));
             String moneyLineOdds = dataCollector.collectMoneylineOdds(oddsElements, xRefMap, dataEventId);
             excelBuilder.setMoneyLineOdds(moneyLineOdds, dataEventId);
+            String spreadOdds =  dataCollector.collectSpreadOdds(oddsElements, xRefMap, dataEventId);
+            excelBuilder.setSpreadOdds(spreadOdds, dataEventId);
             consensusElements = webSiteReader.readCleanWebsite("https://contests.covers.com/consensus/matchupconsensusdetails?externalId=%2fsport%2ffootball%2fcompetition%3a" + dataEventId);
             dataCollector.collectConsensusData(consensusElements, dataEventId);
             excelBuilder.setThisWeekAwayTeamsMap(dataCollector.getAwayFullNameMap());

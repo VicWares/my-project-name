@@ -9,7 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="Version 211220A Working with Cnsensus and homw/away Monelyline odds">
+    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="Version 211221 Fixed game data and game week">
+      <change beforePath="$PROJECT_DIR$/Covers.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DanCovers.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-project-name.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my-project-name.iws" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" afterDir="false" />
@@ -70,6 +72,9 @@
       <facet id="Covers/invalid/Spring" />
       <facet id="Covers/invalid/Web" />
       <facet id="Covers/invalid/Web2" />
+      <facet id="DanCovers/invalid/Spring" />
+      <facet id="DanCovers/invalid/Web" />
+      <facet id="DanCovers/invalid/Web2" />
     </ignored-facets>
   </component>
   <component name="MarkdownSettingsMigration">
@@ -121,7 +126,7 @@
     <configuration name="Main" type="Application" factoryName="Application" activateToolWindowBeforeRun="false" nameIsGenerated="true">
       <option name="INCLUDE_PROVIDED_SCOPE" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.wintrisstech.Main" />
-      <module name="Covers" />
+      <module name="DanCovers" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.wintrisstech.*" />
@@ -475,13 +480,6 @@
       <workItem from="1632534768500" duration="2357000" />
       <workItem from="1633195616838" duration="20000" />
     </task>
-    <task id="LOCAL-00019" summary="version 210416&#10;Reclaim Event ID's">
-      <created>1618631580623</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1618631580623</updated>
-    </task>
     <task id="LOCAL-00020" summary="version 210417, getting home and away team">
       <created>1618692108690</created>
       <option name="number" value="00020" />
@@ -818,7 +816,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640039393717</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="Version 211221 Fixed game data and game week">
+      <created>1640129056241</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1640129056244</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -856,7 +861,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version 210603...Trying to use HashMaps..." />
     <MESSAGE value="version 210603A...Loading SportData update sheet with teams/dates" />
     <MESSAGE value="version 210604...Loading SportData update sheet with teams/dates/OU/ATS" />
     <MESSAGE value="version 210612...Reworked version 210605. Trying to cycle through all weeks." />
@@ -881,7 +885,8 @@
     <MESSAGE value="Version 211219 Getting Away/Home odds" />
     <MESSAGE value="Version 211220 Putting away odds in 'excel'" />
     <MESSAGE value="Version 211220A Working with Cnsensus and homw/away Monelyline odds" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 211220A Working with Cnsensus and homw/away Monelyline odds" />
+    <MESSAGE value="Version 211221 Fixed game data and game week" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 211221 Fixed game data and game week" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
