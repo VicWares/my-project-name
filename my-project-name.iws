@@ -9,19 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="Version 211221 Fixed game data and game week">
-      <change afterPath="$PROJECT_DIR$/Covers.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-project-name.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.ipr" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-project-name.iws" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.iws" afterDir="false" />
+    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelWriter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/DataCollector.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/DataCollector.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/ExcelBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/ExcelBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -485,14 +476,7 @@
       <workItem from="1640827050600" duration="17215000" />
       <workItem from="1640844888304" duration="288000" />
       <workItem from="1640846268616" duration="305000" />
-      <workItem from="1640888836367" duration="7184000" />
-    </task>
-    <task id="LOCAL-00020" summary="version 210417, getting home and away team">
-      <created>1618692108690</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1618692108690</updated>
+      <workItem from="1640888836367" duration="7565000" />
     </task>
     <task id="LOCAL-00021" summary="version 210426, starting to get all games in an NFL week">
       <created>1619480954031</created>
@@ -830,7 +814,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640129056244</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="Version 211230 working with Moneyline odds only">
+      <created>1640898783873</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1640898783876</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -868,7 +859,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version 210603A...Loading SportData update sheet with teams/dates" />
     <MESSAGE value="version 210604...Loading SportData update sheet with teams/dates/OU/ATS" />
     <MESSAGE value="version 210612...Reworked version 210605. Trying to cycle through all weeks." />
     <MESSAGE value="version 210612A...Working for 32 matchups...then quits...out of array index" />
@@ -893,7 +883,8 @@
     <MESSAGE value="Version 211220 Putting away odds in 'excel'" />
     <MESSAGE value="Version 211220A Working with Cnsensus and homw/away Monelyline odds" />
     <MESSAGE value="Version 211221 Fixed game data and game week" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 211221 Fixed game data and game week" />
+    <MESSAGE value="Version 211230 working with Moneyline odds only" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 211230 working with Moneyline odds only" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -138,7 +138,6 @@ public class DataCollector
         String moneyLineHomeOdds = moneyLineOddsArray[0];
         String moneyLineAwayOdds = moneyLineOddsArray[3];
         String moneylineOddsString = moneyLineAwayOdds + " " + moneyLineHomeOdds;
-        System.out.println(moneylineOddsString);
         return moneylineOddsString;//awayOdds space homeOdds
     }
     public HashMap<String, String> getHomeFullNameMap()
