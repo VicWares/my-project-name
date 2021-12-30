@@ -19,10 +19,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="DanCovers" />
+        <module name="Covers" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Covers" target="11" />
       <module name="DanCovers" target="11" />
     </bytecodeTargetLevel>
   </component>
@@ -180,7 +181,7 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DanCovers.iml" filepath="$PROJECT_DIR$/DanCovers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Covers.iml" filepath="$PROJECT_DIR$/Covers.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11.0.5" project-jdk-type="JavaSDK">
@@ -211,8 +212,12 @@
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/woodstox/woodstox-core/5.2.1/woodstox-core-5.2.1.jar!/" />
       </CLASSES>
-      <JAVADOC />
-      <SOURCES />
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/woodstox/woodstox-core/5.2.1/woodstox-core-5.2.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/woodstox/woodstox-core/5.2.1/woodstox-core-5.2.1-sources.jar!/" />
+      </SOURCES>
     </library>
     <library name="Maven: com.github.virtuald:curvesapi:1.06">
       <CLASSES>

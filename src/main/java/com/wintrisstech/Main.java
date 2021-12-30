@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 211223
+ * version 211230
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 public class Main extends JComponent
 {
-    private static String version = "211221";
+    private static String version = "211223";
     private XSSFWorkbook sportDataWorkbook;
     private HashMap<String, String> weekNumberMap = new HashMap<>();
     private HashMap<String, String> cityNameMap = new HashMap<>();
@@ -27,13 +27,9 @@ public class Main extends JComponent
     public ExcelBuilder excelBuilder = new ExcelBuilder();
     public ExcelWriter excelWriter = new ExcelWriter();
     public DataCollector dataCollector = new DataCollector();
-//    private Elements weekElements;
-//    private Elements seasonMatchupElements;
     private Elements consensusElements;
     private int globalMatchupIndex = 3;
     private Elements oddsElements;
-//    private String MLhomeOdds;
-//    private String MLawayOdds;
 
     public static void main(String[] args) throws IOException, ParseException
     {
@@ -47,7 +43,7 @@ public class Main extends JComponent
         fillWeekNumberMap();
         dataCollector.setCityNameMap(cityNameMap);
         String weekNumber = JOptionPane.showInputDialog("Enter NFL week number");
-        weekNumber = "16";
+        weekNumber = "17";
         String weekDate = weekNumberMap.get(weekNumber);
         Elements nflElements = webSiteReader.readCleanWebsite("https://www.covers.com/sports/nfl/matchups?selectedDate=" + weekDate);
         Elements weekElements = nflElements.select(".cmg_game_data, .cmg_matchup_game_box");
@@ -61,11 +57,14 @@ public class Main extends JComponent
         for (Map.Entry<String, String> entry : xRefMap.entrySet())
         {
             String dataEventId = entry.getKey();
-            System.out.println("Main64 " + dataEventId + " " + xRefMap.get(dataEventId) + " " + dataCollector.getGameDatesMap().get(dataEventId) + " " + dataCollector.getAwayFullNameMap().get(dataEventId) + " vs " + dataCollector.getHomeFullNameMap().get(dataEventId));
-            String moneyLineOdds = dataCollector.collectMoneylineOdds(oddsElements, xRefMap, dataEventId);
+            String dataGame = xRefMap.get(dataEventId);
+            //System.out.println("Main64 " + dataEventId + " " + xRefMap.get(dataEventId) + " " + dataCollector.getGameDatesMap().get(dataEventId) + " " + dataCollector.getAwayFullNameMap().get(dataEventId) + " vs " + dataCollector.getHomeFullNameMap().get(dataEventId));
+
+
+            Elements moneyLineOddsElements = oddsElements.select("[data-game*=" + dataGame + "]:nth-child(9)");
+            System.out.println("....." + moneyLineOddsElements.text());
+            String moneyLineOdds = dataCollector.collectMoneylineOdds(moneyLineOddsElements, xRefMap, dataEventId);
             excelBuilder.setMoneyLineOdds(moneyLineOdds, dataEventId);
-            String spreadOdds =  dataCollector.collectSpreadOdds(oddsElements, xRefMap, dataEventId);
-            excelBuilder.setSpreadOdds(spreadOdds, dataEventId);
             consensusElements = webSiteReader.readCleanWebsite("https://contests.covers.com/consensus/matchupconsensusdetails?externalId=%2fsport%2ffootball%2fcompetition%3a" + dataEventId);
             dataCollector.collectConsensusData(consensusElements, dataEventId);
             excelBuilder.setThisWeekAwayTeamsMap(dataCollector.getAwayFullNameMap());
