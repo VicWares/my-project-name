@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 211230
+ * version 211231A
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
@@ -17,7 +17,8 @@ import java.util.HashMap;
 import java.util.Map;
 public class Main extends JComponent
 {
-    private static String version = "211230";
+    private static String version = "211231";
+    public static String weekNumber;
     private XSSFWorkbook sportDataWorkbook;
     private HashMap<String, String> weekNumberMap = new HashMap<>();
     private HashMap<String, String> cityNameMap = new HashMap<>();
@@ -30,36 +31,46 @@ public class Main extends JComponent
     private Elements consensusElements;
     private int globalMatchupIndex = 3;
     private Elements oddsElements;
-
     public static void main(String[] args) throws IOException, ParseException
     {
-        System.out.println("SharpMarkets, version " + version + ", Copyright 2021 Dan Farris");
+        System.out.println("Main37 SharpMarkets, version " + version + ", Copyright 2021 Dan Farris");
         Main main = new Main();
-        main.initialize();//Get out of static context
+        weekNumber = JOptionPane.showInputDialog("Enter NFL week number");
+        for (int i = 17; i < 19; i++)
+        {
+            weekNumber = String.valueOf(i);
+            main.initialize(weekNumber);//Get out of static context
+            main.doTheJob(weekNumber);
+        }
+        main.finishUp();
     }
-    private void initialize() throws IOException
+    private void initialize(String weekNumber) throws IOException
     {
-        fillCityNameMap();//Builds full city name map to correct for Covers variations in team city names
+        fillCityNameMap(weekNumber);//Builds full city name map to correct for Covers variations in team city names
         fillWeekNumberMap();
         dataCollector.setCityNameMap(cityNameMap);
-        String weekNumber = JOptionPane.showInputDialog("Enter NFL week number");
-        weekNumber = "17";
         String weekDate = weekNumberMap.get(weekNumber);
         Elements nflElements = webSiteReader.readCleanWebsite("https://www.covers.com/sports/nfl/matchups?selectedDate=" + weekDate);
         Elements weekElements = nflElements.select(".cmg_game_data, .cmg_matchup_game_box");
         xRefMap = buildXref(weekElements);
         oddsElements = webSiteReader.readCleanWebsite("https://www.covers.com/sport/football/nfl/odds");//Info from log-in date through the present NFL week
-        System.out.println("Main56 week number => " + weekNumber + ", week date => " + weekDate + ", " + weekElements.size() + " games this week") ;
+        //System.out.println("Main57 " + oddsElements.attr("data-game"));//TODO Investigate this!!!
+        System.out.println("Main58 week number => " + weekNumber + ", week date => " + weekDate + ", " + weekElements.size() + " games this week");
         System.out.println(xRefMap);
         dataCollector.collectTeamInfo(weekElements);
         sportDataWorkbook = excelReader.readSportData();
+    }
+    private void doTheJob(String weekNumber) throws IOException
+    {
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< MAIN LOOP===================MAIN LOOP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> processing all mtchups this week
         for (Map.Entry<String, String> entry : xRefMap.entrySet())
         {
+            System.out.println("Main68 Week " + weekNumber + ", " + xRefMap.size() + " games.");
             String dataEventId = entry.getKey();
             String dataGame = xRefMap.get(dataEventId);
-            Elements moneyLineOddsElements = oddsElements.select("[data-game*=" + dataGame + "]:nth-child(9)");
-            String moneyLineOdds = dataCollector.collectMoneylineOdds(moneyLineOddsElements, xRefMap, dataEventId);
+            String selectorString = "[data-game=" + dataGame + "]";
+            System.out.println("Main71 " + selectorString);
+            String moneyLineOdds = dataCollector.collectMoneylineOdds(oddsElements.select(selectorString), xRefMap, dataEventId);
             excelBuilder.setMoneyLineOdds(moneyLineOdds, dataEventId);
             consensusElements = webSiteReader.readCleanWebsite("https://contests.covers.com/consensus/matchupconsensusdetails?externalId=%2fsport%2ffootball%2fcompetition%3a" + dataEventId);
             dataCollector.collectConsensusData(consensusElements, dataEventId);
@@ -76,15 +87,26 @@ public class Main extends JComponent
             excelBuilder.buildExcel(sportDataWorkbook, dataEventId, globalMatchupIndex, dataCollector.getGameIdentifierMap().get(dataEventId));
             globalMatchupIndex++;
         }
-        excelWriter.openOutputStream();
-        excelWriter.writeSportData(sportDataWorkbook);
-        excelWriter.closeOutputStream();
+    }
+    private void finishUp()
+    {
+        try
+        {
+            excelWriter.openOutputStream();
+            excelWriter.writeSportData(sportDataWorkbook);
+            excelWriter.closeOutputStream();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
         System.out.println("Proper Finish...HOORAY!");
     }
-
     public HashMap<String, String> buildXref(Elements weekElements)
     {
-        for (Element e : weekElements) {
+        xRefMap.clear();
+        for (Element e : weekElements)
+        {
             String dataLinkString = e.attr("data-link");
             String[] dlsa = dataLinkString.split("/");
             String dataLink = dlsa[5];
@@ -93,8 +115,7 @@ public class Main extends JComponent
         }
         return xRefMap;
     }
-
-    private void fillCityNameMap()
+    private void fillCityNameMap(String weekNumber)
     {
         cityNameMap.put("Minneapolis", "Minnesota");//Minnesota Vikings
         cityNameMap.put("Tampa", "Tampa Bay");//Tampa Bay Buccaneers
@@ -137,7 +158,6 @@ public class Main extends JComponent
         cityNameMap.put("San Francisco", "San Francisco");//San Francisco 49ers
         cityNameMap.put("Seattle", "Seattle");//Seattle Seahawks
     }
-
     private void fillWeekNumberMap()
     {
         weekNumberMap.put("1", "2021-09-09");//Season start...Week 1
