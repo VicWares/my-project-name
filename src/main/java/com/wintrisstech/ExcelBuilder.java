@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 211231A
+ * version 220110
  *******************************************************************/
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -74,11 +74,11 @@ public class ExcelBuilder
         atsAway = atsAwaysMap.get(dataEventID);
         ouOver = ouOversMap.get(dataEventID);
         ouUnder = ouUndersMap.get(dataEventID);
-        System.out.println("EB77 globalEventIndex -------------------------> " + globalEventIndex);
         sportDataSheet.getRow(globalEventIndex).createCell(0);
         sportDataSheet.getRow(globalEventIndex).getCell(0).setCellStyle(leftStyle);
         sportDataSheet.getRow(0).getCell(0).setCellValue(time);
         sportDataSheet.getRow(globalEventIndex).getCell(0).setCellValue(gameIdentifier);//e.g. 2021 - Washington Football Team @ Dallas Cowboys
+        System.out.println("EB81 " + globalEventIndex + " " + gameIdentifier);
 
         sportDataSheet.getRow(globalEventIndex).createCell(1);
         sportDataSheet.getRow(globalEventIndex).getCell(1).setCellStyle(centerStyle);

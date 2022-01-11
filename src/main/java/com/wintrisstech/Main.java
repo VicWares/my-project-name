@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 211231A
+ * version 220110
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 public class Main extends JComponent
 {
-    private static String version = "211231";
+    private static String version = "220110";
     public static String weekNumber;
     private XSSFWorkbook sportDataWorkbook;
     private HashMap<String, String> weekNumberMap = new HashMap<>();
@@ -36,7 +36,7 @@ public class Main extends JComponent
         System.out.println("Main37 SharpMarkets, version " + version + ", Copyright 2021 Dan Farris");
         Main main = new Main();
         weekNumber = JOptionPane.showInputDialog("Enter NFL week number");
-        for (int i = 17; i < 19; i++)
+        for (int i = 19; i < 20; i++)
         {
             weekNumber = String.valueOf(i);
             main.initialize(weekNumber);//Get out of static context
@@ -54,7 +54,6 @@ public class Main extends JComponent
         Elements weekElements = nflElements.select(".cmg_game_data, .cmg_matchup_game_box");
         xRefMap = buildXref(weekElements);
         oddsElements = webSiteReader.readCleanWebsite("https://www.covers.com/sport/football/nfl/odds");//Info from log-in date through the present NFL week
-        //System.out.println("Main57 " + oddsElements.attr("data-game"));//TODO Investigate this!!!
         System.out.println("Main58 week number => " + weekNumber + ", week date => " + weekDate + ", " + weekElements.size() + " games this week");
         System.out.println(xRefMap);
         dataCollector.collectTeamInfo(weekElements);
@@ -65,13 +64,8 @@ public class Main extends JComponent
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< MAIN LOOP===================MAIN LOOP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> processing all mtchups this week
         for (Map.Entry<String, String> entry : xRefMap.entrySet())
         {
-            System.out.println("Main68 Week " + weekNumber + ", " + xRefMap.size() + " games.");
             String dataEventId = entry.getKey();
-            String dataGame = xRefMap.get(dataEventId);
-            String selectorString = "[data-game=" + dataGame + "]";
-            System.out.println("Main71 " + selectorString);
-            String moneyLineOdds = dataCollector.collectMoneylineOdds(oddsElements.select(selectorString), xRefMap, dataEventId);
-            excelBuilder.setMoneyLineOdds(moneyLineOdds, dataEventId);
+            String dataGame = xRefMap.get(dataEventId);//e.g. 263450 one of the two ways that Covers identifies matchups..the other is data-event-id e.g. 87328...see xRef for cross ref
             consensusElements = webSiteReader.readCleanWebsite("https://contests.covers.com/consensus/matchupconsensusdetails?externalId=%2fsport%2ffootball%2fcompetition%3a" + dataEventId);
             dataCollector.collectConsensusData(consensusElements, dataEventId);
             excelBuilder.setThisWeekAwayTeamsMap(dataCollector.getAwayFullNameMap());
@@ -84,6 +78,9 @@ public class Main extends JComponent
             excelBuilder.setCompleteHomeTeamName(dataCollector.getHomeTeamCompleteName());
             excelBuilder.setCompleteAwayTeamName(dataCollector.getAwayTeamCompleteName());
             excelBuilder.setGameIdentifier(dataCollector.getGameIdentifierMap().get(dataEventId));
+            String selectorString = dataCollector.getAwayTeamCompleteName() + " vs "+ dataCollector.getHomeTeamCompleteName();
+            String moneyLineOdds = dataCollector.collectMoneylineOdds(oddsElements.select(selectorString), xRefMap, dataEventId);
+            excelBuilder.setMoneyLineOdds(moneyLineOdds, dataEventId);
             excelBuilder.buildExcel(sportDataWorkbook, dataEventId, globalMatchupIndex, dataCollector.getGameIdentifierMap().get(dataEventId));
             globalMatchupIndex++;
         }
@@ -100,7 +97,7 @@ public class Main extends JComponent
         {
             e.printStackTrace();
         }
-        System.out.println("Proper Finish...HOORAY!");
+        System.out.println("Main100 Proper Finish...HOORAY!");
     }
     public HashMap<String, String> buildXref(Elements weekElements)
     {
@@ -178,6 +175,7 @@ public class Main extends JComponent
         weekNumberMap.put("16", "2021-12-23");
         weekNumberMap.put("17", "2022-01-02");
         weekNumberMap.put("18", "2022-01-09");
-        weekNumberMap.put("19", "2022-02-06");
+        weekNumberMap.put("19", "2022-01-15");
+        weekNumberMap.put("20", "2022-02-06");//Wildcard
     }
 }
