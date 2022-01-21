@@ -2,20 +2,18 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 220110
+ * version 220120
  * write new NFL Covers data to the large SportData Excel sheet
  *******************************************************************/
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+
+import java.io.*;
 public class ExcelWriter
 {
-    private String deskTopPath = System.getProperty("user.home") + "/Desktop";/* User's desktop path */
     private OutputStream os;
-    public void writeSportData(XSSFWorkbook sportDataWorkbook)
+    public void writeSportData(XSSFWorkbook sportDataWorkbook, String currentDir)
     {
+        String deskTopPath = currentDir + "/target/SportData.xlsx";
         System.out.println("EW20 Writing to desktop");
         try
         {
@@ -26,12 +24,12 @@ public class ExcelWriter
             e.printStackTrace();
         }
     }
-    public void closeOutputStream() throws IOException
+    public void closeOutputStream(String currentDir) throws IOException
     {
         os.close();
     }
-    public void openOutputStream() throws FileNotFoundException
+    public void openOutputStream(String currentDir) throws FileNotFoundException
     {
-        os = new FileOutputStream(deskTopPath + "/SportData.xlsx");
+        os = new FileOutputStream(currentDir + "/target/SportData.xlsx");
     }
 }

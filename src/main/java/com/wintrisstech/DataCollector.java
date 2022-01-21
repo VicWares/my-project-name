@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 220110
+ * version 220120
  * Builds data event id array and calendar date array
  *******************************************************************/
 import org.jsoup.nodes.Element;

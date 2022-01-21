@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 220110
+ * version 220120
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
@@ -31,6 +31,8 @@ public class Main extends JComponent
     private Elements consensusElements;
     private int globalMatchupIndex = 3;
     private Elements oddsElements;
+    private String currentDir = System.getProperty("user.dir");
+
     public static void main(String[] args) throws IOException, ParseException
     {
         System.out.println("Main37 SharpMarkets, version " + version + ", Copyright 2021 Dan Farris");
@@ -46,6 +48,7 @@ public class Main extends JComponent
     }
     private void initialize(String weekNumber) throws IOException
     {
+        System.out.println("current dir = " + currentDir);
         fillCityNameMap(weekNumber);//Builds full city name map to correct for Covers variations in team city names
         fillWeekNumberMap();
         dataCollector.setCityNameMap(cityNameMap);
@@ -57,7 +60,7 @@ public class Main extends JComponent
         System.out.println("Main58 week number => " + weekNumber + ", week date => " + weekDate + ", " + weekElements.size() + " games this week");
         System.out.println(xRefMap);
         dataCollector.collectTeamInfo(weekElements);
-        sportDataWorkbook = excelReader.readSportData();
+        sportDataWorkbook = excelReader.readSportData(currentDir);
     }
     private void doTheJob(String weekNumber) throws IOException
     {
@@ -89,9 +92,9 @@ public class Main extends JComponent
     {
         try
         {
-            excelWriter.openOutputStream();
-            excelWriter.writeSportData(sportDataWorkbook);
-            excelWriter.closeOutputStream();
+            excelWriter.openOutputStream(currentDir);
+            excelWriter.writeSportData(sportDataWorkbook,currentDir);
+            excelWriter.closeOutputStream(currentDir);
         }
         catch (IOException e)
         {
