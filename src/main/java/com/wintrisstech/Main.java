@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 public class Main extends JComponent
 {
-    private static String version = "220110";
+    private static String version = "220120";
     public static String weekNumber;
     private XSSFWorkbook sportDataWorkbook;
     private HashMap<String, String> weekNumberMap = new HashMap<>();
