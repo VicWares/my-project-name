@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 220120
+ * version 220203
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
@@ -115,7 +115,7 @@ public class Main extends JComponent
         }
         return xRefMap;
     }
-    private void fillCityNameMap(String weekNumber)
+    private void fillCityNameMap(String weekNumber)//Covers name, desired Excel report name
     {
         cityNameMap.put("Minneapolis", "Minnesota");//Minnesota Vikings
         cityNameMap.put("Tampa", "Tampa Bay");//Tampa Bay Buccaneers
@@ -133,6 +133,7 @@ public class Main extends JComponent
         cityNameMap.put("East Rutherford", "New York");//New York Giants and New York Jets
         cityNameMap.put("New York", "New York");//New York Giants and New York Jets
         cityNameMap.put("Landover", "Washington");//Washington Football Team
+        cityNameMap.put("Commanders", "Washington");//Washington Football Team
         cityNameMap.put("Washington", "Washington");//Washington Football Team
         cityNameMap.put("Nashville", "Tennessee");//Tennessee Titans
         cityNameMap.put("Miami", "Miami");//Miami Dolphins
