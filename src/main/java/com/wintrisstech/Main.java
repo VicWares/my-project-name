@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 220203
+ * version 220204
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
@@ -35,12 +35,13 @@ public class Main extends JComponent
 
     public static void main(String[] args) throws IOException, ParseException
     {
-        System.out.println("Main37 SharpMarkets, version " + version + ", Copyright 2021 Dan Farris");
+        System.out.println("Main37 SharpMarkets, version " + version + ", Copyright 2022 Dan Farris");
         Main main = new Main();
         weekNumber = JOptionPane.showInputDialog("Enter NFL week number");
-        for (int i = 19; i < 20; i++)
+        for (int i = 22; i < 24; i++)
         {
             weekNumber = String.valueOf(i);
+            System.out.println("Main44, week " + weekNumber);
             main.initialize(weekNumber);//Get out of static context
             main.doTheJob(weekNumber);
         }
@@ -53,7 +54,7 @@ public class Main extends JComponent
         fillWeekNumberMap();
         dataCollector.setCityNameMap(cityNameMap);
         String weekDate = weekNumberMap.get(weekNumber);
-        Elements nflElements = webSiteReader.readCleanWebsite("https://www.covers.com/sports/nfl/matchups?selectedDate=" + weekDate);
+        Elements nflElements = webSiteReader.readCleanWebsite("https://www.covers.com/sports/nfl/matchups?selectedDate=" + weekNumberMap.get(weekNumber));
         Elements weekElements = nflElements.select(".cmg_game_data, .cmg_matchup_game_box");
         xRefMap = buildXref(weekElements);
         oddsElements = webSiteReader.readCleanWebsite("https://www.covers.com/sport/football/nfl/odds");//Info from log-in date through the present NFL week
@@ -82,8 +83,8 @@ public class Main extends JComponent
             excelBuilder.setCompleteAwayTeamName(dataCollector.getAwayTeamCompleteName());
             excelBuilder.setGameIdentifier(dataCollector.getGameIdentifierMap().get(dataEventId));
             String selectorString = dataCollector.getAwayTeamCompleteName() + " vs "+ dataCollector.getHomeTeamCompleteName();
-            String moneyLineOdds = dataCollector.collectMoneylineOdds(oddsElements.select(selectorString), xRefMap, dataEventId);
-            excelBuilder.setMoneyLineOdds(moneyLineOdds, dataEventId);
+            //String moneyLineOdds = dataCollector.collectMoneylineOdds(oddsElements.select(selectorString), xRefMap, dataEventId);
+            //excelBuilder.setMoneyLineOdds(moneyLineOdds, dataEventId);
             excelBuilder.buildExcel(sportDataWorkbook, dataEventId, globalMatchupIndex, dataCollector.getGameIdentifierMap().get(dataEventId));
             globalMatchupIndex++;
         }
@@ -179,7 +180,10 @@ public class Main extends JComponent
         weekNumberMap.put("16", "2021-12-23");
         weekNumberMap.put("17", "2022-01-02");
         weekNumberMap.put("18", "2022-01-09");
-        weekNumberMap.put("19", "2022-01-15");
-        weekNumberMap.put("20", "2022-02-06");//Wildcard
+        weekNumberMap.put("19", "2022-01-15");//Wildcard
+        weekNumberMap.put("20", "2022-02-06");//Divisional
+        weekNumberMap.put("21", "2022-02-06");//Conference
+        weekNumberMap.put("22", "2022-02-06");//Pro Bowl
+        weekNumberMap.put("23", "2022-02-06");//Super Bowl
     }
 }

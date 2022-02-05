@@ -11,12 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/my-project-name.iws" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelWriter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/ExcelBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/ExcelBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -507,14 +504,10 @@
       <workItem from="1642743363148" duration="259000" />
       <workItem from="1643344493972" duration="182000" />
       <workItem from="1643603509091" duration="735000" />
-      <workItem from="1643950050723" duration="436000" />
-    </task>
-    <task id="LOCAL-00026" summary="version 210523...getting all NFL season dates">
-      <created>1621827104308</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1621827104308</updated>
+      <workItem from="1643950050723" duration="768000" />
+      <workItem from="1644016247058" duration="964000" />
+      <workItem from="1644019026965" duration="373000" />
+      <workItem from="1644019610109" duration="3147000" />
     </task>
     <task id="LOCAL-00027" summary="version 210525...getting home and away team">
       <created>1621999009849</created>
@@ -852,7 +845,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642742270490</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="Version 220203 Added Washington Commanders name">
+      <created>1643950543864</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1643950543867</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -890,7 +890,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version 210908...working...can't get rid of lfull Covers.lsx" />
     <MESSAGE value="version 211010" />
     <MESSAGE value="version 211031&#10;Getting Home: American, decimal, fractional/Away: American, decimal, fractional" />
     <MESSAGE value="version 211111&#10;Trying to build data-game-id/datagame xref map" />
@@ -915,7 +914,8 @@
     <MESSAGE value="Version 220110 clean up working for multiple weeks...no odds data" />
     <MESSAGE value="Version 220120 Moved SportData.xlsx to target to work with Windows" />
     <MESSAGE value="Version 220120 Moved SportData.xlsx to target to work with Windows...no change" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 220120 Moved SportData.xlsx to target to work with Windows...no change" />
+    <MESSAGE value="Version 220203 Added Washington Commanders name" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 220203 Added Washington Commanders name" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
