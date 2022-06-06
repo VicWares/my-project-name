@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 211223
+ * version 220605
  * Reads/cleans input URL and returns all Elements and Document
  *******************************************************************/
 import org.jsoup.Jsoup;
