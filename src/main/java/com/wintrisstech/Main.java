@@ -2,22 +2,27 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 2220608
+ * version 22060888
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import javax.swing.*;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 public class Main extends JComponent
 {
-    private static String version = "211223";
+    private static String version = "2112233";
     private XSSFWorkbook sportDataWorkbook;
     private HashMap<String, String> weekNumberMap = new HashMap<>();
     private HashMap<String, String> cityNameMap = new HashMap<>();
@@ -30,7 +35,7 @@ public class Main extends JComponent
     private Elements consensusElements;
     private int globalMatchupIndex = 3;
     private Elements oddsElements;
-
+    WebDriver drv;
     public static void main(String[] args) throws IOException, ParseException
     {
         System.out.println("SharpMarkets, version " + version + ", Copyright 2021 Dan Farris");
@@ -53,6 +58,26 @@ public class Main extends JComponent
         System.out.println(xRefMap);
         dataCollector.collectTeamInfo(weekElements);
         sportDataWorkbook = excelReader.readSportData();
+        //
+        {
+            System.out.println("SetUp version " + version);
+            System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
+            System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
+            drv = new FirefoxDriver();
+            drv.manage().window().maximize();
+            drv.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            String url = "https://www.covers.com/sport/football/nfl/odds";
+            drv.get(url);
+            drv.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            List<WebElement> elements = drv.findElements(By.cssSelector("#__spreadTotalDiv-nfl-265276 > table > tbody > tr:nth-child(2) > td:nth-child(9)"));
+            {
+                for (WebElement e : elements)
+                {
+                    System.out.println(e.getText());
+                }
+            }
+        }
+        //
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< MAIN LOOP===================MAIN LOOP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> processing all mtchups this week
         for (Map.Entry<String, String> entry : xRefMap.entrySet())
         {
