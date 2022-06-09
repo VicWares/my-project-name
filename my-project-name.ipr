@@ -184,8 +184,8 @@
       <module fileurl="file://$PROJECT_DIR$/Covers.iml" filepath="$PROJECT_DIR$/Covers.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11.0.5" project-jdk-type="JavaSDK">
-    <output url="file://$USER_HOME$/WintrissTechCorp/Covers/Covers/CCCC" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_18" project-jdk-name="openjdk-18" project-jdk-type="JavaSDK">
+    <output url="file://$USER_HOME$/WintrissTechCorp/Covers/Covers/NewCovers" />
   </component>
   <component name="RemoteRepositoriesConfiguration">
     <remote-repository>

@@ -9,7 +9,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>groupId</groupId>
   <artifactId>Covers</artifactId>
-  <version>210322</version>
+  <version>220608</version>
   <build>
     <defaultGoal>package</defaultGoal>
     <plugins>

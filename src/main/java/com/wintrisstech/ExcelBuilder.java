@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 211230
+ * version 2220608
  *******************************************************************/
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -142,14 +142,14 @@ public class ExcelBuilder
     }
     public void setMoneyLineOdds(String moneyLineOdds, String dataEventId)
     {
-        String[] moneyLineOddsArray = moneyLineOdds.split(" ");
-        if (moneyLineOddsArray.length > 0)
-      {
-          awayMoneyLineOdds = moneyLineOddsArray[0];
-          awayMoneyLineOddsMap.put(dataEventId, awayMoneyLineOdds);
-          homeMoneyLineOdds = moneyLineOddsArray[1];
-          homeMoneyLineOddsMap.put(dataEventId, homeMoneyLineOdds);
-      }
+//        String[] moneyLineOddsArray = moneyLineOdds.split(" ");
+//        if (moneyLineOddsArray.length > 0)
+//      {
+//          awayMoneyLineOdds = moneyLineOddsArray[0];
+//          awayMoneyLineOddsMap.put(dataEventId, awayMoneyLineOdds);
+//          homeMoneyLineOdds = moneyLineOddsArray[1];
+//          homeMoneyLineOddsMap.put(dataEventId, homeMoneyLineOdds);
+//      }
     }
     public void setSpreadOdds(String spreadOdds, String dataEventId)
     {
