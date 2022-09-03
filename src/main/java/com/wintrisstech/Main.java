@@ -18,9 +18,9 @@ import java.util.HashMap;
 import java.util.Map;
 public class Main extends JComponent
 {
-    private static String version = "220617";
+    private static String version = "220903";
     private XSSFWorkbook sportDataWorkbook;
-    private HashMap<String, String> weekNumberMap = new HashMap<>();
+    private HashMap<String, String> weekDateMap = new HashMap<>();
     private HashMap<String, String> cityNameMap = new HashMap<>();
     private HashMap<String, String> xRefMap = new HashMap<>();
     public WebSiteReader webSiteReader = new WebSiteReader();
@@ -41,11 +41,11 @@ public class Main extends JComponent
     private void initialize() throws IOException
     {
         fillCityNameMap();//Builds full city name map to correct for Covers variations in team city names
-        fillWeekNumberMap();
+        fillWeekDateMap();
         dataCollector.setCityNameMap(cityNameMap);
         String weekNumber = JOptionPane.showInputDialog("Enter NFL week number");
-        weekNumber = "17";
-        String weekDate = weekNumberMap.get(weekNumber);
+        weekNumber = "1";
+        String weekDate = weekDateMap.get(weekNumber);
         Elements nflElements = webSiteReader.readCleanWebsite("https://www.covers.com/sports/nfl/matchups?selectedDate=" + weekDate);
         Elements weekElements = nflElements.select(".cmg_game_data, .cmg_matchup_game_box");
         xRefMap = buildXref(weekElements);
@@ -54,31 +54,11 @@ public class Main extends JComponent
         System.out.println(xRefMap);
         dataCollector.collectTeamInfo(weekElements);
         sportDataWorkbook = excelReader.readSportData();
-        //
-//        {
-//            System.out.println("SetUp version " + version);
-//            System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
-//            System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
-//            drv = new FirefoxDriver();
-//            drv.manage().window().maximize();
-//            drv.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//            String url = "https://www.covers.com/sport/football/nfl/odds";
-//            drv.get(url);
-//            drv.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-//            List<WebElement> elements = drv.findElements(By.cssSelector("#__spreadTotalDiv-nfl-265276 > table > tbody > tr:nth-child(2) > td:nth-child(9)"));
-//            {
-//                for (WebElement e : elements)
-//                {
-//                    System.out.println(e.getText());
-//                }
-//            }
-//        }
-        //
-        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< MAIN LOOP===================MAIN LOOP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> processing all mtchups this week
         for (Map.Entry<String, String> entry : xRefMap.entrySet())
         {
             String dataEventId = entry.getKey();
             String dataGame = xRefMap.get(dataEventId);
+            System.out.println("Main61 START MAIN LOOP-----------------------------------------------------------------------START MAIN LOOP FOR dataEventId/dataGame " + dataEventId + "/" + dataGame + "    " + dataCollector.getAwayFullNameMap().get(dataEventId) + " @ " +  dataCollector.getHomeFullNameMap().get(dataEventId) + "-------------------------------------------------------------------------------------------START MAIN LOOP");
             //System.out.println("Main64 " + dataEventId + " " + xRefMap.get(dataEventId) + " " + dataCollector.getGameDatesMap().get(dataEventId) + " " + dataCollector.getAwayFullNameMap().get(dataEventId) + " vs " + dataCollector.getHomeFullNameMap().get(dataEventId));
 
 
@@ -100,6 +80,7 @@ public class Main extends JComponent
             excelBuilder.setGameIdentifier(dataCollector.getGameIdentifierMap().get(dataEventId));
             excelBuilder.buildExcel(sportDataWorkbook, dataEventId, globalMatchupIndex, dataCollector.getGameIdentifierMap().get(dataEventId));
             globalMatchupIndex++;
+            System.out.println("END MAIN LOOP-----------------------------------------------------------------------END MAIN LOOP FOR dataEventId/dataGame " + dataEventId + "/" + dataGame + "    " + dataCollector.getAwayFullNameMap().get(dataEventId)+ " @ " + dataCollector.getHomeFullNameMap().get(dataEventId) + "-------------------------------------------------------------------------------------------END MAIN LOOP");
         }
         excelWriter.openOutputStream();
         excelWriter.writeSportData(sportDataWorkbook);
@@ -121,6 +102,7 @@ public class Main extends JComponent
 
     private void fillCityNameMap()
     {
+        System.out.println("Main104............Filling city map.");
         cityNameMap.put("Minneapolis", "Minnesota");//Minnesota Vikings
         cityNameMap.put("Tampa", "Tampa Bay");//Tampa Bay Buccaneers
         cityNameMap.put("Tampa Bay", "Tampa Bay");//Tampa Bay Buccaneers
@@ -163,26 +145,26 @@ public class Main extends JComponent
         cityNameMap.put("Seattle", "Seattle");//Seattle Seahawks
     }
 
-    private void fillWeekNumberMap()
+    private void fillWeekDateMap()
     {
-        weekNumberMap.put("1", "2021-09-09");//Season start...Week 1
-        weekNumberMap.put("2", "2021-09-16");
-        weekNumberMap.put("3", "2021-09-23");
-        weekNumberMap.put("4", "2021-09-30");
-        weekNumberMap.put("5", "2021-10-07");
-        weekNumberMap.put("6", "2021-10-14");
-        weekNumberMap.put("7", "2021-10-21");
-        weekNumberMap.put("8", "2021-10-28");
-        weekNumberMap.put("9", "2021-11-04");
-        weekNumberMap.put("10", "2021-11-11");
-        weekNumberMap.put("11", "2021-11-18");
-        weekNumberMap.put("12", "2021-11-25");
-        weekNumberMap.put("13", "2021-12-02");
-        weekNumberMap.put("14", "2021-12-09");
-        weekNumberMap.put("15", "2021-12-16");
-        weekNumberMap.put("16", "2021-12-23");
-        weekNumberMap.put("17", "2022-01-02");
-        weekNumberMap.put("18", "2022-01-09");
-        weekNumberMap.put("19", "2022-02-06");
+        weekDateMap.put("1", "2022-09-08");//Season 2022 start...Week 1
+        weekDateMap.put("2", "2022-09-15");
+        weekDateMap.put("3", "2022-09-22");
+        weekDateMap.put("4", "2022-09-29");
+        weekDateMap.put("5", "2022-10-06");
+        weekDateMap.put("6", "2022-10-13");
+        weekDateMap.put("7", "2022-10-20");
+        weekDateMap.put("8", "2022-10-27");
+        weekDateMap.put("9", "2022-11-03");
+        weekDateMap.put("10", "2022-11-10");
+        weekDateMap.put("11", "2022-11-17");
+        weekDateMap.put("12", "2022-11-24");
+        weekDateMap.put("13", "2022-12-01");
+        weekDateMap.put("14", "2022-12-08");
+        weekDateMap.put("15", "2022-12-15");
+        weekDateMap.put("16", "2022-12-22");
+        weekDateMap.put("17", "2022-12-29");
+        weekDateMap.put("18", "2023-01-08");
+        weekDateMap.put("19", "2023-02-05");
     }
 }
