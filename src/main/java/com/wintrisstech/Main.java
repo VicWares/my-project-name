@@ -2,8 +2,8 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 220903
- * MyProject9   complete working copy
+ * version 220904
+ * MyProjectNameSun   complete working copy
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
  *******************************************************************/
@@ -65,11 +65,13 @@ public class Main extends JComponent
             dataCollector.collectConsensusData(consensusElements, dataEventId);
             excelBuilder.setThisWeekAwayTeamsMap(dataCollector.getAwayFullNameMap());
             excelBuilder.setHomeTeamsMap(dataCollector.getHomeFullNameMap());
+            excelBuilder.setHomeShortNameMap(dataCollector.getHomeShortNameMap());
+            excelBuilder.setAwayShortNameMap(dataCollector.getAwayShortNameMap());
             excelBuilder.setGameDatesMap(dataCollector.getGameDatesMap());
             excelBuilder.setAtsHomesMap(dataCollector.getAtsHomesMap());
             excelBuilder.setAtsAwaysMap(dataCollector.getAtsAwaysMap());
-            excelBuilder.setOuOversMap(dataCollector.getOuOversMap());
-            excelBuilder.setOuUndersMap(dataCollector.getOuUndersMap());
+            excelBuilder.setOuOversMap(dataCollector.getOuAwayMap());
+            excelBuilder.setOuUndersMap(dataCollector.getOuHomeMap());
             excelBuilder.setCompleteHomeTeamName(dataCollector.getHomeTeamCompleteName());
             excelBuilder.setCompleteAwayTeamName(dataCollector.getAwayTeamCompleteName());
             excelBuilder.setGameIdentifier(dataCollector.getGameIdentifierMap().get(dataEventId));

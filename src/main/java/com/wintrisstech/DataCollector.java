@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 220903
+ * version 220904
  * Builds data event id array and calendar date array
  *******************************************************************/
 import org.jsoup.nodes.Element;
@@ -68,6 +68,8 @@ public class DataCollector
     private HashMap<String, String> cityNameMap = new HashMap<>();
     private HashMap<String, String> idXref = new HashMap<>();
     private String[] bet365OddsArray = new String[6];
+    private String homeTeamShortName;
+    private String awayTeamShortName;
     public HashMap<String, String> getAwayMLoddsMap() {return awayMLoddsMap;}
     public HashMap<String, String> getHomeMLoddsMap() {return awayMLoddsMap;}
     public void collectTeamInfo(Elements thisWeekElements)//From covers.com website for this week's matchups
@@ -76,6 +78,8 @@ public class DataCollector
         {
             homeTeamFullName = e.attr("data-home-team-fullname-search");//e.g. Houston...correcting for different city/name usage
             homeTeamNickname = e.attr("data-home-team-nickname-search");//e.g. Texans
+            homeTeamShortName = thisWeekElements.attr("data-home-team-shortname-search");//Home team abbreviation e.g. LAR
+            awayTeamShortName = thisWeekElements.attr("data-away-team-shortname-search");//Home team abbreviation e.g. BUF
             homeTeamCity = e.attr("data-home-team-city-search");
             homeTeamCity = cityNameMap.get(homeTeamCity);
             homeTeamCompleteName = homeTeamCity + " " + homeTeamNickname;
@@ -97,6 +101,8 @@ public class DataCollector
             thisWeekAwayTeams.add(awayTeamCompleteName);
             homeFullNameMap.put(dataEventId, homeTeamFullName);
             awayFullNameMap.put(dataEventId, awayTeamFullName);
+            homeShortNameMap.put(dataEventId, homeTeamShortName);
+            awayShortNameMap.put(dataEventId, awayTeamShortName);
             thisWeekHomeTeamScores.add(homeTeamScore);
             thisWeekAwayTeamScores.add((awayTeamScore));
             thisGameWeekNumbers.add(thisWeek);
@@ -162,11 +168,11 @@ public class DataCollector
     {
         return atsAwaysMap;
     }
-    public HashMap<String, String> getOuOversMap()
+    public HashMap<String, String> getOuAwayMap()
     {
         return ouOversMap;
     }
-    public HashMap<String, String> getOuUndersMap()
+    public HashMap<String, String> getOuHomeMap()
     {
         return ouUndersMap;
     }
@@ -186,6 +192,14 @@ public class DataCollector
     public void setCityNameMap(HashMap<String, String> cityNameMap)
     {
         this.cityNameMap = cityNameMap;
+    }
+    public HashMap<String, String> getAwayShortNameMap()
+    {
+        return awayShortNameMap;
+    }
+    public HashMap<String, String> getHomeShortNameMap()
+    {
+        return homeShortNameMap;
     }
 }
 
