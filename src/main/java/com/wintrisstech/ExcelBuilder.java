@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 220904
+ * version 220904A
  *******************************************************************/
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -121,21 +121,21 @@ public class ExcelBuilder
         sportDataSheet.getRow(eventIndex).getCell(33).setCellStyle(centerStyle);
         sportDataSheet.getRow(eventIndex).getCell(33).setCellValue(moneylineAwayOdds);
 
-        sportDataSheet.getRow(eventIndex).createCell(59);
-        sportDataSheet.getRow(eventIndex).getCell(59).setCellStyle(myStyle);
-        sportDataSheet.getRow(eventIndex).getCell(59).setCellValue(atsHome);
-
-        sportDataSheet.getRow(eventIndex).createCell(61);
-        sportDataSheet.getRow(eventIndex).getCell(61).setCellStyle(myStyle);
-        sportDataSheet.getRow(eventIndex).getCell(61).setCellValue(atsAway);
+        sportDataSheet.getRow(eventIndex).createCell(66);
+        sportDataSheet.getRow(eventIndex).getCell(66).setCellStyle(myStyle);
+        sportDataSheet.getRow(eventIndex).getCell(66).setCellValue(atsHome);
 
         sportDataSheet.getRow(eventIndex).createCell(64);
         sportDataSheet.getRow(eventIndex).getCell(64).setCellStyle(myStyle);
-        sportDataSheet.getRow(eventIndex).getCell(64).setCellValue(ouAway);
+        sportDataSheet.getRow(eventIndex).getCell(64).setCellValue(atsAway);
 
-        sportDataSheet.getRow(eventIndex).createCell(66);
-        sportDataSheet.getRow(eventIndex).getCell(66).setCellStyle(myStyle);
-        sportDataSheet.getRow(eventIndex).getCell(66).setCellValue(ouHome);
+        sportDataSheet.getRow(eventIndex).createCell(70);
+        sportDataSheet.getRow(eventIndex).getCell(70).setCellStyle(myStyle);
+        sportDataSheet.getRow(eventIndex).getCell(70).setCellValue(ouAway);
+
+        sportDataSheet.getRow(eventIndex).createCell(72);
+        sportDataSheet.getRow(eventIndex).getCell(72).setCellStyle(myStyle);
+        sportDataSheet.getRow(eventIndex).getCell(72).setCellValue(ouHome);
         return sportDataWorkbook;
     }
     public void setMoneylineOddsString(String moneyLineOddString)
