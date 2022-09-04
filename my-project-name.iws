@@ -10,13 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="Version 220903 Going back and adding Glory version stuff that works">
-      <change beforePath="$PROJECT_DIR$/my-project-name.iws" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/ExcelBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/ExcelBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/DataCollector.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/ExcelBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/ExcelReader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/ExcelWriter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/WebSiteReader.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -479,14 +478,7 @@
       <workItem from="1662240538479" duration="7207000" />
       <workItem from="1662247781747" duration="835000" />
       <workItem from="1662248739153" duration="112000" />
-      <workItem from="1662248858450" duration="1884000" />
-    </task>
-    <task id="LOCAL-00021" summary="version 210426, starting to get all games in an NFL week">
-      <created>1619480954031</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1619480954031</updated>
+      <workItem from="1662248858450" duration="2242000" />
     </task>
     <task id="LOCAL-00022" summary="version 210427, woking on iterating all weeks, all games.">
       <created>1619580705018</created>
@@ -824,7 +816,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662242970781</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="Version 220903 Going back and adding Glory version stuff that works">
+      <created>1662251059777</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1662251059778</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
