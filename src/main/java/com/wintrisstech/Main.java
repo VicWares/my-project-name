@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 220617
+ * version 220903
  * MyProject9   complete working copy
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
@@ -31,7 +31,6 @@ public class Main extends JComponent
     private Elements consensusElements;
     private int globalMatchupIndex = 3;
     private Elements oddsElements;
-//    WebDriver drv;
     public static void main(String[] args) throws IOException, ParseException
     {
         System.out.println("SharpMarkets, version " + version + ", Copyright 2021 Dan Farris");
@@ -59,13 +58,9 @@ public class Main extends JComponent
             String dataEventId = entry.getKey();
             String dataGame = xRefMap.get(dataEventId);
             System.out.println("Main61 START MAIN LOOP-----------------------------------------------------------------------START MAIN LOOP FOR dataEventId/dataGame " + dataEventId + "/" + dataGame + "    " + dataCollector.getAwayFullNameMap().get(dataEventId) + " @ " +  dataCollector.getHomeFullNameMap().get(dataEventId) + "-------------------------------------------------------------------------------------------START MAIN LOOP");
-            //System.out.println("Main64 " + dataEventId + " " + xRefMap.get(dataEventId) + " " + dataCollector.getGameDatesMap().get(dataEventId) + " " + dataCollector.getAwayFullNameMap().get(dataEventId) + " vs " + dataCollector.getHomeFullNameMap().get(dataEventId));
-
-
             Elements moneyLineOddsElements = oddsElements.select("[data-game*=" + dataGame + "]:nth-child(9)");
-            System.out.println("....." + moneyLineOddsElements.text());
-            String moneyLineOdds = dataCollector.collectMoneylineOdds(moneyLineOddsElements, xRefMap, dataEventId);
-            excelBuilder.setMoneyLineOdds(moneyLineOdds, dataEventId);
+            System.out.println("Main62 Moneyline odds....." + moneyLineOddsElements.text());
+            excelBuilder.setMoneylineOddsString(moneyLineOddsElements.text());
             consensusElements = webSiteReader.readCleanWebsite("https://contests.covers.com/consensus/matchupconsensusdetails?externalId=%2fsport%2ffootball%2fcompetition%3a" + dataEventId);
             dataCollector.collectConsensusData(consensusElements, dataEventId);
             excelBuilder.setThisWeekAwayTeamsMap(dataCollector.getAwayFullNameMap());

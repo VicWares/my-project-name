@@ -9,10 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="Version 211221 Fixed game data and game week">
-      <change beforePath="$PROJECT_DIR$/my-project-name.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.ipr" afterDir="false" />
+    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="Version 220903 Going back and adding Glory version stuff that works">
       <change beforePath="$PROJECT_DIR$/my-project-name.iws" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelWriter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/ExcelBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/ExcelBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wintrisstech/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,6 +96,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
@@ -472,14 +476,10 @@
       <workItem from="1655508742925" duration="2172000" />
       <workItem from="1655510982038" duration="128000" />
       <workItem from="1655511149590" duration="480000" />
-      <workItem from="1662240538479" duration="2166000" />
-    </task>
-    <task id="LOCAL-00020" summary="version 210417, getting home and away team">
-      <created>1618692108690</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1618692108690</updated>
+      <workItem from="1662240538479" duration="7207000" />
+      <workItem from="1662247781747" duration="835000" />
+      <workItem from="1662248739153" duration="112000" />
+      <workItem from="1662248858450" duration="1884000" />
     </task>
     <task id="LOCAL-00021" summary="version 210426, starting to get all games in an NFL week">
       <created>1619480954031</created>
@@ -817,7 +817,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640129056244</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="Version 220903 Going back and adding Glory version stuff that works">
+      <created>1662242970780</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1662242970781</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -855,7 +862,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version 210603A...Loading SportData update sheet with teams/dates" />
     <MESSAGE value="version 210604...Loading SportData update sheet with teams/dates/OU/ATS" />
     <MESSAGE value="version 210612...Reworked version 210605. Trying to cycle through all weeks." />
     <MESSAGE value="version 210612A...Working for 32 matchups...then quits...out of array index" />
@@ -880,7 +886,8 @@
     <MESSAGE value="Version 211220 Putting away odds in 'excel'" />
     <MESSAGE value="Version 211220A Working with Cnsensus and homw/away Monelyline odds" />
     <MESSAGE value="Version 211221 Fixed game data and game week" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 211221 Fixed game data and game week" />
+    <MESSAGE value="Version 220903 Going back and adding Glory version stuff that works" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 220903 Going back and adding Glory version stuff that works" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
