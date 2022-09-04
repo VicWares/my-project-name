@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2021 Dan Farris
- * version 220904A
+ * version 220904B
  * MyProjectNameSun   complete working copy
  * Build .dmg with
  * jpackage --verbose --name SmartPack --input target --main-jar Covers.jar --main-class com.wintrisstech.Main.class
@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 public class Main extends JComponent
 {
-    private static String version = "220904A";
+    private static String version = "220904B";
     private XSSFWorkbook sportDataWorkbook;
     private HashMap<String, String> weekDateMap = new HashMap<>();
     private HashMap<String, String> cityNameMap = new HashMap<>();
@@ -67,13 +67,14 @@ public class Main extends JComponent
             excelBuilder.setHomeTeamsMap(dataCollector.getHomeFullNameMap());
             excelBuilder.setHomeShortNameMap(dataCollector.getHomeShortNameMap());
             excelBuilder.setAwayShortNameMap(dataCollector.getAwayShortNameMap());
+            //excelBuilder.setAwayTeamCompleteName(dataCollector.getAwayTeamCompleteName());
             excelBuilder.setGameDatesMap(dataCollector.getGameDatesMap());
             excelBuilder.setAtsHomesMap(dataCollector.getAtsHomesMap());
             excelBuilder.setAtsAwaysMap(dataCollector.getAtsAwaysMap());
             excelBuilder.setOuOversMap(dataCollector.getOuAwayMap());
             excelBuilder.setOuUndersMap(dataCollector.getOuHomeMap());
-            excelBuilder.setCompleteHomeTeamName(dataCollector.getHomeTeamCompleteName());
-            excelBuilder.setCompleteAwayTeamName(dataCollector.getAwayTeamCompleteName());
+            excelBuilder.setAwayCompleteNameMap(dataCollector.getAwayTeamCompleteNameMap());
+            excelBuilder.setHomeCompleteNameMap(dataCollector.getHomeTeamCompleteNameMap());
             excelBuilder.setGameIdentifier(dataCollector.getGameIdentifierMap().get(dataEventId));
             excelBuilder.buildExcel(sportDataWorkbook, dataEventId, globalMatchupIndex, dataCollector.getGameIdentifierMap().get(dataEventId));
             globalMatchupIndex++;

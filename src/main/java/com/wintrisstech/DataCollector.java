@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 220904A
+ * version 220904B
  * Builds data event id array and calendar date array
  *******************************************************************/
 import org.jsoup.nodes.Element;
@@ -39,7 +39,7 @@ public class DataCollector
     private String awayTeamFullName;//e.g. Cleveland...data-home-team-fullname-search
     private String homeTeamFullName;//e.g Houston...data-home-team-fullname-search
     private String awayTeamCompleteName;//e.g. Kansas City Chiefs
-    private static String homeTeamCompleteName;//e.g Houston Texans
+    private String homeTeamCompleteName;//e.g Houston Texans
     private String gameIdentifier;//e.g 2020 - Houston Texans @ Kansas City Chiefs
     private String awayTeamScore;
     private String homeTeamScore;
@@ -70,6 +70,11 @@ public class DataCollector
     private String[] bet365OddsArray = new String[6];
     private String homeTeamShortName;
     private String awayTeamShortName;
+    private HashMap<String, String>  homeTeamCompleteNameMap = new HashMap<>();
+    private HashMap<String, String>  awayTeamCompleteNameMap = new HashMap<>();
+    private String awayShortName;
+    private String[] gameDateTime;
+    private String homeShortName;
     public HashMap<String, String> getAwayMLoddsMap() {return awayMLoddsMap;}
     public HashMap<String, String> getHomeMLoddsMap() {return awayMLoddsMap;}
     public void collectTeamInfo(Elements thisWeekElements)//From covers.com website for this week's matchups
@@ -90,7 +95,7 @@ public class DataCollector
             awayTeamCompleteName = awayTeamCity + " " + awayTeamNickname;
             gameIdentifier = thisSeason + " - " + awayTeamCompleteName + " @ " + homeTeamCompleteName;
             dataEventId = e.attr("data-event-id");
-            String[] gameDateTime = e.attr("data-game-date").split(" ");
+            gameDateTime = e.attr("data-game-date").split(" ");
             gameDate = gameDateTime[0];
             awayTeamScore = e.attr("data-away-score");
             thisWeek = e.attr("data-competition-type");
@@ -103,12 +108,14 @@ public class DataCollector
             awayFullNameMap.put(dataEventId, awayTeamFullName);
             homeShortNameMap.put(dataEventId, homeTeamShortName);
             awayShortNameMap.put(dataEventId, awayTeamShortName);
+            homeTeamCompleteNameMap.put(dataEventId, homeTeamCompleteName);
+            awayTeamCompleteNameMap.put(dataEventId, awayTeamCompleteName);
             thisWeekHomeTeamScores.add(homeTeamScore);
             thisWeekAwayTeamScores.add((awayTeamScore));
             thisGameWeekNumbers.add(thisWeek);
-            String awayShortName = e.attr("data-away-team-shortname-search");//Away team
+            awayShortName = e.attr("data-away-team-shortname-search");//Away team
             awayShortNameMap.put(dataEventId, awayShortName);
-            String homeShortName = e.attr("data-home-team-shortname-search");//Home team
+            homeShortName = e.attr("data-home-team-shortname-search");//Home team
             homeShortNameMap.put(dataEventId, homeShortName);
         }
     }
@@ -181,14 +188,11 @@ public class DataCollector
     {
         this.thisSeason = thisSeason;
     }
-    public String getAwayTeamCompleteName()
-    {
-        return awayTeamCompleteName;
-    }
-    public String getHomeTeamCompleteName()
-    {
-        return homeTeamCompleteName;
-    }
+//    public String getAwayTeamCompleteName() {return awayTeamCompleteName;}
+//    public String getHomeTeamCompleteName()
+//    {
+//        return homeTeamCompleteName;
+//    }
     public void setCityNameMap(HashMap<String, String> cityNameMap)
     {
         this.cityNameMap = cityNameMap;
@@ -201,5 +205,7 @@ public class DataCollector
     {
         return homeShortNameMap;
     }
+    public HashMap<String, String> getHomeTeamCompleteNameMap() {return homeTeamCompleteNameMap;}
+    public HashMap<String, String> getAwayTeamCompleteNameMap() {return awayTeamCompleteNameMap;}
 }
 
