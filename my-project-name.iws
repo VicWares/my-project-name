@@ -9,12 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="Revision 220904A Consensus and moneyline added.">
+    <list default="true" id="b2c3da40-7b61-4401-afb6-59cd422b2e8b" name="Default Changelist" comment="Revision 220904B Home/Away complete names added. Shorten names.">
       <change beforePath="$PROJECT_DIR$/my-project-name.iws" beforeDir="false" afterPath="$PROJECT_DIR$/my-project-name.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/DataCollector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/ExcelWriter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/WebSiteReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/WebSiteReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wintrisstech/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wintrisstech/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -482,14 +484,7 @@
       <workItem from="1662264427330" duration="104000" />
       <workItem from="1662307228520" duration="3583000" />
       <workItem from="1662316647633" duration="4855000" />
-      <workItem from="1662325520260" duration="5956000" />
-    </task>
-    <task id="LOCAL-00024" summary="version 210508...using regex for team names...bad!">
-      <created>1620495322361</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1620495322361</updated>
+      <workItem from="1662325520260" duration="21617000" />
     </task>
     <task id="LOCAL-00025" summary="version 210508A...ready to read/write sportsData.">
       <created>1620510209251</created>
@@ -827,7 +822,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662318839561</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="Revision 220904B Home/Away complete names added. Shorten names.">
+      <created>1662331531436</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1662331531436</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -865,7 +867,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version 210612A...Working for 32 matchups...then quits...out of array index" />
     <MESSAGE value="version 210613A...Working for all weeks, all matchups of 2019-2020 season.  Delivered to Dan for comments." />
     <MESSAGE value="version 210905...cleaning up format." />
     <MESSAGE value="version 210908...working...can't get rid of lfull Covers.lsx" />
@@ -890,7 +891,8 @@
     <MESSAGE value="Version 220903 Going back and adding Glory version stuff that works" />
     <MESSAGE value="Revision 220904 Glory converted to MyProjectSun, Short names added." />
     <MESSAGE value="Revision 220904A Consensus and moneyline added." />
-    <option name="LAST_COMMIT_MESSAGE" value="Revision 220904A Consensus and moneyline added." />
+    <MESSAGE value="Revision 220904B Home/Away complete names added. Shorten names." />
+    <option name="LAST_COMMIT_MESSAGE" value="Revision 220904B Home/Away complete names added. Shorten names." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 220904B
+ * version 220904c
  *******************************************************************/
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -20,12 +20,15 @@ import static org.apache.poi.ss.usermodel.HorizontalAlignment.CENTER;
 import static org.apache.poi.ss.usermodel.HorizontalAlignment.LEFT;
 public class ExcelBuilder
 {
-    private String thisSeason;
+    private String season;
     private String ouHome;
     private String ouAway;
     private String homeTeam;
     private String awayTeam;
     private String matchupDate;
+    private String weekNumber;
+    private String homeDivision;//M13
+    private String awayDivision;//AB28
     private HashMap<String, String> homeTeamsMap = new HashMap<>();
     private HashMap<String, String> awayTeamsMap = new HashMap<>();
     private HashMap<String, String> gameDatesMap = new HashMap<>();
@@ -38,6 +41,8 @@ public class ExcelBuilder
     private HashMap<String, String> awayMoneyLineOddsMap = new HashMap<>();
     private HashMap<String, String> homeSpreadOddsMap = new HashMap<>();
     private HashMap<String, String> awaySpreadOddsMap = new HashMap<>();
+    private HashMap<String, String> homeTotalOpenOddsMap = new HashMap<>();
+    private HashMap<String, String> homeTotalCloseOddsMap = new HashMap<>();
     private Sheet sportDataSheet;
     private XSSFWorkbook sportDataWorkBook = new XSSFWorkbook();
     private XSSFSheet sportDataUpdateSheet = null;
@@ -83,7 +88,6 @@ public class ExcelBuilder
         ouAway = ouOversMap.get(dataEventID);
         ouHome = ouUndersMap.get(dataEventID);
 
-
         sportDataSheet.getRow(eventIndex).createCell(0);
         sportDataSheet.getRow(eventIndex).getCell(0).setCellStyle(leftStyle);
         sportDataSheet.getRow(0).getCell(0).setCellValue(time);
@@ -92,6 +96,14 @@ public class ExcelBuilder
         sportDataSheet.getRow(eventIndex).createCell(1);
         sportDataSheet.getRow(eventIndex).getCell(1).setCellStyle(leftStyle);
         sportDataSheet.getRow(eventIndex).getCell(1).setCellValue(matchupDate);
+
+        sportDataSheet.getRow(eventIndex).createCell(2);
+        sportDataSheet.getRow(eventIndex).getCell(2).setCellStyle(leftStyle);
+        sportDataSheet.getRow(eventIndex).getCell(2).setCellValue(season);
+
+        sportDataSheet.getRow(eventIndex).createCell(3);
+        sportDataSheet.getRow(eventIndex).getCell(3).setCellStyle(leftStyle);
+        sportDataSheet.getRow(eventIndex).getCell(3).setCellValue("Week " + weekNumber);
 
         sportDataSheet.getRow(eventIndex).createCell(10);// Home team full name e.g. Dallas Coyboys Column K11
         sportDataSheet.getRow(eventIndex).getCell(10).setCellStyle(leftStyle);
@@ -156,6 +168,9 @@ public class ExcelBuilder
             homeMoneylineOdds = moneylineOddsArray[3];//Moneyline Bet365 home odds
         }
     }
+    public void setTotalOddsString(String totalOddsString)
+    {
+    }
     public void setHomeTeamsMap(HashMap<String, String> homeTeamsMap){this.homeTeamsMap = homeTeamsMap;}
     public void setThisWeekAwayTeamsMap(HashMap<String, String> thisWeekAwayTeamsMap){this.awayTeamsMap = thisWeekAwayTeamsMap;}
     public void setHomeShortNameMap(HashMap<String, String> homeShortNameMapMap){this.homeShortNameMap = homeShortNameMapMap;}
@@ -205,5 +220,29 @@ public class ExcelBuilder
     public void setHomeCompleteNameMap(HashMap<String, String> homeCompleteNameMap)
     {
         this.homeCompleteNameMap = homeCompleteNameMap;
+    }
+    public void setTotalHomeOpenOddsMap(HashMap<String, String> homeTotalOpenOddsMap)
+    {
+        this.homeTotalOpenOddsMap = homeTotalOpenOddsMap;
+    }
+    public void setTotalHomeCloseOddsMap(HashMap<String, String> homeTotalCloseOddsMap)
+    {
+        this.homeTotalCloseOddsMap = homeTotalCloseOddsMap;
+    }
+    public void setSeason(String season)
+    {
+        this.season = season;
+    }
+    public void setWeekNumber(String weekNumber)
+    {
+        this.weekNumber = weekNumber;
+    }
+    public void setHomeDivision(String homeDivision)
+    {
+        this.homeDivision = homeDivision;
+    }
+    public void setAwayDivision(String awayDivision)
+    {
+        this.awayDivision = awayDivision;
     }
 }

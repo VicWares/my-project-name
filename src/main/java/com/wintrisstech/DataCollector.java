@@ -2,7 +2,7 @@ package com.wintrisstech;
 /*******************************************************************
  * Covers NFL Extraction Tool
  * Copyright 2020 Dan Farris
- * version 220904B
+ * version 220904c
  * Builds data event id array and calendar date array
  *******************************************************************/
 import org.jsoup.nodes.Element;
@@ -29,6 +29,10 @@ public class DataCollector
     private static HashMap<String, String> homeMLoddsMap = new HashMap<>();
     private static ArrayList<String> awayFractionalOddsArray = new ArrayList<>();
     private static HashMap<String, String> awayFractionalOddsMap = new HashMap<>();
+    private static HashMap<String, String> totalHomeOpenOddsMap = new HashMap<>();
+    private static HashMap<String, String> totalHomeCloseOddsMap = new HashMap<>();
+    private HashMap getHomeTotalCloseOddsMap = new HashMap<String, String>();
+    private HashMap getHomeTotalOpenOddsMap = new HashMap<String, String>();
     private HashMap<String, String> mlHomeOdds = new HashMap<String, String>();
     private HashMap<String, String> mlAwayOdds = new HashMap<String, String>();
     private String dataEventId;
@@ -67,6 +71,8 @@ public class DataCollector
     private HashMap<String, String> ouOversMap = new HashMap<>();
     private HashMap<String, String> cityNameMap = new HashMap<>();
     private HashMap<String, String> idXref = new HashMap<>();
+    private HashMap<String, String> homeTotalOpenOddsMap = new HashMap<>();
+    private HashMap<String, String> homeTotalCloseOddsMap = new HashMap<>();
     private String[] bet365OddsArray = new String[6];
     private String homeTeamShortName;
     private String awayTeamShortName;
@@ -75,16 +81,19 @@ public class DataCollector
     private String awayShortName;
     private String[] gameDateTime;
     private String homeShortName;
+    private String month;
+    private String day;
     public HashMap<String, String> getAwayMLoddsMap() {return awayMLoddsMap;}
     public HashMap<String, String> getHomeMLoddsMap() {return awayMLoddsMap;}
-    public void collectTeamInfo(Elements thisWeekElements)//From covers.com website for this week's matchups
+    public void collectTeamInfo(Elements weekElements)//From covers.com website for this week's matchups
     {
-        for (Element e : thisWeekElements)//Build week matchup IDs array
+        for (Element e : weekElements)//Build week matchup IDs array
         {
+            month = e.attr("");
             homeTeamFullName = e.attr("data-home-team-fullname-search");//e.g. Houston...correcting for different city/name usage
             homeTeamNickname = e.attr("data-home-team-nickname-search");//e.g. Texans
-            homeTeamShortName = thisWeekElements.attr("data-home-team-shortname-search");//Home team abbreviation e.g. LAR
-            awayTeamShortName = thisWeekElements.attr("data-away-team-shortname-search");//Home team abbreviation e.g. BUF
+            homeTeamShortName = weekElements.attr("data-home-team-shortname-search");//Home team abbreviation e.g. LAR
+            awayTeamShortName = weekElements.attr("data-away-team-shortname-search");//Home team abbreviation e.g. BUF
             homeTeamCity = e.attr("data-home-team-city-search");
             homeTeamCity = cityNameMap.get(homeTeamCity);
             homeTeamCompleteName = homeTeamCity + " " + homeTeamNickname;
@@ -144,17 +153,6 @@ public class DataCollector
         atsHomesMap.put(thisMatchupID, atsAway);
         atsAwaysMap.put(thisMatchupID, atsHome);
     }
-    public String collectMoneylineOdds(Elements oddsElements, HashMap<String, String> xRefMap, String dataEventId)
-    {
-//        String dataGame = xRefMap.get(dataEventId);//e.g. data-event-id...83480 => data-game...244451
-//        String[] moneyLineOddsArray = oddsElements.select("*").text().split(" ");
-//        String moneyLineHomeOdds = moneyLineOddsArray[0];
-//        String moneyLineAwayOdds = moneyLineOddsArray[3];
-//        String moneylineOddsString = moneyLineAwayOdds + " " + moneyLineHomeOdds;
-//        System.out.println(moneylineOddsString);
-//        return moneylineOddsString;//awayOdds space homeOdds
-        return "0";
-    }
     public HashMap<String, String> getHomeFullNameMap()
     {
         return homeFullNameMap;
@@ -184,15 +182,6 @@ public class DataCollector
         return ouUndersMap;
     }
     public HashMap<String, String> getGameIdentifierMap(){return gameIdentifierMap;}
-    public void setThisSeason(String thisSeason)
-    {
-        this.thisSeason = thisSeason;
-    }
-//    public String getAwayTeamCompleteName() {return awayTeamCompleteName;}
-//    public String getHomeTeamCompleteName()
-//    {
-//        return homeTeamCompleteName;
-//    }
     public void setCityNameMap(HashMap<String, String> cityNameMap)
     {
         this.cityNameMap = cityNameMap;
@@ -207,5 +196,21 @@ public class DataCollector
     }
     public HashMap<String, String> getHomeTeamCompleteNameMap() {return homeTeamCompleteNameMap;}
     public HashMap<String, String> getAwayTeamCompleteNameMap() {return awayTeamCompleteNameMap;}
+    public HashMap<String, String> getGetHomeTotalCloseOddsMap()
+    {
+        return getHomeTotalCloseOddsMap;
+    }
+    public HashMap<String, String> getGetTotalHomeOpenOddsMap()
+    {
+        return getHomeTotalOpenOddsMap;
+    }
+    public HashMap<String, String> getTotalHomeOpenOddsMap()
+    {
+        return totalHomeOpenOddsMap;
+    }
+    public HashMap<String, String> getTotalHomeCloseOddsMap()
+    {
+        return  totalHomeCloseOddsMap;
+    }
 }
 
